@@ -1,0 +1,128 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="/js/pages/index.js"></script>
+{% endblock %}
+
+{% block background %}
+    <div class="js-index-bg b-index-bg__box">
+        <div class="b-index-bg">
+            <video loop autoplay muted controls="true" width='100%' height='100%' id="indexVideo" poster="" class="b-index-bg__video">
+                <source src="video/index.webm" type="video/webm; codecs=&quot;vp8, vorbis&quot;">
+                <source type="video/mp4" src="video/index.mp4">
+            </video>
+            <div class="js-canvas-box b-canvas__box">
+                <img src="i/index/fake-video-1920-1080.gif" alt="">
+                <canvas id="canvasVideo" class="b-canvas js-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="js-index-scroll b-index-scroll">
+        Подробнее
+        <span class="b-index-scroll__i"></span>
+    </a>
+{% endblock %}
+
+{% block body %}
+    <div class="js-content b-content">
+        <div class="js-index-marker"></div>
+
+        <section class="js-index-title js-window-height b-index-title">
+            <div class="b-wrapper">
+                <div class="b-title">
+                    {% content 'index.title' %}
+                    <h1>Продакшн студия</h1>
+                    <p>Корпоративное, вирусное и рекламное видео для компаний из России, Англии, США и Европы.</p>
+                    {% endcontent %}
+                </div>
+            </div>
+        </section>
+        <div class="js-bg-animation-stop"></div>
+
+        <section class="b-index-product__section">
+            <div class="b-wrapper">
+                <div class="js-index-product-box u-clear-fix b-index-product__box">
+                    <a href="#" class="js-index-product b-index-product advertising">
+                        <div class="b-index-product__line b-index-product__line_1"></div>
+                        <div class="b-index-product__line b-index-product__line_2"></div>
+                        <div class="b-index-product__line b-index-product__line_3"></div>
+                        <div class="b-index-product__line b-index-product__line_4"></div>
+                        <div class="b-index-product__text">
+                            <h4>Реклама</h4>
+                            <p>{{ content('index.adv') }}</p>
+                        </div>
+                    </a>
+                    <a href="#" class="js-index-product b-index-product long documentary">
+                        <div class="b-index-product__line b-index-product__line_1"></div>
+                        <div class="b-index-product__line b-index-product__line_2"></div>
+                        <div class="b-index-product__line b-index-product__line_3"></div>
+                        <div class="b-index-product__line b-index-product__line_4"></div>
+                        <div class="b-index-product__text">
+                            <h4>Корпоративное видео</h4>
+                            <p>{{ content('index.corp') }}</p>
+                        </div>
+                    </a>
+                    <a href="#" class="js-index-product b-index-product food">
+                        <div class="b-index-product__line b-index-product__line_1"></div>
+                        <div class="b-index-product__line b-index-product__line_2"></div>
+                        <div class="b-index-product__line b-index-product__line_3"></div>
+                        <div class="b-index-product__line b-index-product__line_4"></div>
+                        <div class="b-index-product__text">
+                            <h4>Food-съемка</h4>
+                            <p>{{ content('index.food') }}</p>
+                        </div>
+                    </a>
+                    <a href="#" class="js-index-product b-index-product long nocomers">
+                        <div class="b-index-product__line b-index-product__line_1"></div>
+                        <div class="b-index-product__line b-index-product__line_2"></div>
+                        <div class="b-index-product__line b-index-product__line_3"></div>
+                        <div class="b-index-product__line b-index-product__line_4"></div>
+                        <div class="b-index-product__text">
+                            <h4>Некоммерческое видео</h4>
+                            <p>{{ content('index.free') }}</p>
+                        </div>
+                    </a>
+                    <a href="#" class="js-index-product b-index-product fashion">
+                        <div class="b-index-product__line b-index-product__line_1"></div>
+                        <div class="b-index-product__line b-index-product__line_2"></div>
+                        <div class="b-index-product__line b-index-product__line_3"></div>
+                        <div class="b-index-product__line b-index-product__line_4"></div>
+                        <div class="b-index-product__text">
+                            <h4>Fashion</h4>
+                            <p>{{ content('index.fashion') }}</p>
+                        </div>
+                    </a>
+                    <a href="#" class="js-index-product b-index-product all">
+                        <div class="b-index-product__line b-index-product__line_1"></div>
+                        <div class="b-index-product__line b-index-product__line_2"></div>
+                        <div class="b-index-product__line b-index-product__line_3"></div>
+                        <div class="b-index-product__line b-index-product__line_4"></div>
+                        <div class="b-index-product__text">
+                            <h4>Другое</h4>
+                            <p>{{ content('index.other') }}</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="js-clients-section b-clients__section">
+            <div class="b-wrapper">
+                <h2>Наши клиенты</h2>
+                <div class="js-clients-carousel b-clients-carousel">
+                    {% for client in clients %}
+                    <div class="b-clients-carousel__item">
+                        <div class="b-table">
+                            <a href="{{ client.url }}">
+                                <img src="{% path client.logo, 'default' %}" alt="{{ client.name }}">
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="js-clients-bg b-clients__bg"></div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

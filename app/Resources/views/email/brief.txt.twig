@@ -1,0 +1,90 @@
+E-mail: {{ email }}
+
+Предполагаемая стоимость: {{ common_price }}
+
+Предполагаемые даты съемки: {{ date }}
+
+Тематика съемки: {% if type == 1 %}реклама или имиджевое видео
+{% elseif type == 2 %}промо или корпоративное видео
+{% elseif type == 3 %}музыкальное видео
+{% elseif type == 4 %}food-съемка
+{% elseif type == 5 %}{{ type_other }}
+{% endif %}
+
+Целевая аудитория: {{ audience }}
+
+Цели и задачи создания видео: {{ aim }}
+
+Продолжительность готового видео: {{ time }}
+
+Срок сдачи готового видео: {{ deadline }}
+
+Референсы / примеры:
+{{ example_1 }}
+{{ example_2 }}
+{{ example_3 }}
+
+Кто ответственен за разработку идеи и концепции: {% if 'clients' in idea %}заказчик{% endif %}{{ idea|length > 1 ? ' и ' : '' }}{% if 'company' in idea %}команда Shot'n'Cut{% endif %}
+
+Кто ответственен за разработку сценария: {% if 'clients' in scenario %}заказчик{% endif %}{{ scenario|length > 1 ? ' и ' : '' }}{% if 'company' in scenario %}команда Shot'n'Cut{% endif %}
+
+Кто будет выступать в качестве героев в Вашем видео: {% if heroes == 'no' %}герои для моего видео не требуются
+{% elseif heroes == 'not-prof' %}непрофессиональные актеры {{ heroes_not_prof }} шт.
+{% elseif heroes == 'prof' %}актеры {{ heroes_prof }} шт.
+{% endif %}
+
+Кто занимается поиском героев: {% if hero_search == 'clients' %}заказчик{% elseif hero_search == 'company' %}команда Shot'n'Cut{% endif %}
+
+Необходимо ли привлечение визажиста: {% if visagiste == 'yes' %}да{% elseif visagiste == 'no' %}нет{% endif %}
+
+Необходимо ли привлечение стилиста: {% if stylist == 'yes' %}да{% elseif stylist == 'no' %}нет{% endif %}
+
+Требуется ли создание раскадровок: {% if storyboard == 'yes' %}да{% elseif storyboard == 'no' %}нет{% endif %}
+
+Предполагаемое кол-во дней съемки: {{ days }}
+
+Оборудование: {% if 1 in equipment %}базовый набор (камера, оптика, штатив){% endif %}
+{% if 2 in equipment %}стабилизация и движение в кадре (Ronin, слайдер){% endif %}
+{% if 3 in equipment %}студийный свет{% endif %}
+{% if 4 in equipment %}киноосвещение{% endif %}
+{% if 5 in equipment %}аэросъемка{% endif %}
+{% if 6 in equipment %}{{ equipment_other }}{% endif %}
+
+Требуется ли специалист по работе с актерами: {% if team == 'yes' %}да{% elseif team == 'no' %}нет{% endif %}
+
+Монтаж: {% if montage == 'yes' %}да{% elseif montage == 'no' %}нет{% endif %}
+
+Цветокоррекция: {% if color == 'yes' %}да{% elseif color == 'no' %}нет{% endif %}
+
+Sound design: {% if sound == 'yes' %}да{% elseif sound == 'no' %}нет{% endif %}
+
+Музыка: {% if music == 1 %}покупка трека с аудистока
+{% elseif music == 2 %}индивидуальное написание музыкального трека композитором
+{% elseif music == 3 %}{{ music_other }}
+{% endif %}
+
+Закадровый голос (диктор): {% if speaker == 'yes' %}да {% if speaker_lg|length %}({% if 'eng' in speaker_lg %}зарубежный диктор (native speaker){% endif %}{% if speaker_lg|length > 1 %},{% endif %}{% if 'rus' in speaker_lg %}русскоязычный диктор{% endif %}){% endif %}
+{% elseif speaker == 'no' %}нет
+{% endif %}
+
+Копирайтер: {% if copywriter == 'yes' %}да{% elseif copywriter == 'no' %}нет{% endif %}
+
+Графика и анимация: {% if animation == 1 %}2D анимация
+{% elseif animation == 2 %}3D анимация
+{% elseif animation == 3 %}{{ animation_other }}
+{% elseif animation == 4 %}не нужна
+{% endif %}
+
+Каким именно образом Вы планируете брендировать свой продукт в видео:
+{% if branding == 1 %}Визуально узнаваемая на протяжении всего видео реклама бренда/продукта. Видео обязательно должно начинаться и/или заканчиваться логотипом.
+{% elseif branding == 2 %}Не явно, но видео должно начинаться и заканчиваться логотипом бренда, чтобы зрительно четко понимал, чей это ролик.
+{% elseif branding == 3 %}Не явно. Видео не должно выглядеть как реклама. Главная цель – создать ролик, которым будут делиться с друзьями.
+{% elseif branding == 4 %}{{ branding_other }}
+{% endif %}
+
+Через какие каналы Вы планируете донести видео до целевой аудитории:
+{% if 1 in social %}соцсети{% endif %}
+{% if 2 in social %}канал на Youtube/Vimeo{% endif %}
+{% if 3 in social %}ТВ{% endif %}
+{% if 4 in social %}реклама в общественных местах{% endif %}
+{% if 5 in social %}{{ social_other }}{% endif %}

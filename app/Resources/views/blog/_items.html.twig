@@ -1,0 +1,25 @@
+{% for item in items %}
+    <a href="{{ path('blog_show', {slug: item.url}) }}" class="b-blog">
+        <span class="b-blog__date">{{ item.created|localizeddate('none', 'none', app.request.locale, "Europe/Moscow", "d MMMM Y") }}</span>
+        <h3>{{ item.title }}</h3>
+        <div class="js-blog-pic b-blog__pic">
+            {% if item.background %}
+                <div class="b-blog__pic_img" style="background-image: url({% path item.background, 'list' %})"></div>
+            {% elseif item.photos|length %}
+                <div class="b-blog__pic_img" style="background-image: url({% path item.photos.0, 'list' %})"></div>
+            {% else %}
+                <div class="b-blog__pic_img" style="background-color: #444;"></div>
+            {% endif %}
+            <div class="b-blog__pic_line b-blog__pic_line_1"></div>
+            <div class="b-blog__pic_line b-blog__pic_line_2"></div>
+            <div class="b-blog__pic_line b-blog__pic_line_3"></div>
+            <div class="b-blog__pic_line b-blog__pic_line_4"></div>
+        </div>
+        <div class="b-blog__text">
+            {{ item.annotation|raw }}
+        </div>
+        <div class="b-button__box">
+            <span class="b-button b-button_small">Читать</span>
+        </div>
+    </a>
+{% endfor %}

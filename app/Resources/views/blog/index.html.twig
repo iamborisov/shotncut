@@ -1,0 +1,32 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="/js/pages/blog-list.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="js-content b-content">
+        <section class="b-top__section">
+            <div class="b-wrapper">
+                <div class="b-title">
+                    {% content 'blog.title' %}
+                    <h1>Блог</h1>
+                    <p>Новости и события из жизни Shot’n’Cut</p>
+                    {% endcontent %}
+                </div>
+            </div>
+        </section>
+
+        <section class="b-blog__section">
+            <div class="b-wrapper">
+                <div class="js-blog-append u-clear-fix b-blog__box">
+                    {% include 'blog/_items.html.twig' with {items: items} %}
+                </div>
+                <div class="b-button__box b-button__box_more">
+                    <a href="#" data-action="{{ path('blog_page') }}" class="js-show-blog b-button">Показать еще</a>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

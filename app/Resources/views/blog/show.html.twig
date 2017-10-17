@@ -1,0 +1,73 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="/js/pages/blog-inner.js"></script>
+{% endblock %}
+
+{% block background %}
+    {% if item.background %}
+        <div class="js-blog-bg b-blog-inner__pic" style="background-image: url({% path item.background, 'default' %})"></div>
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="js-content b-content">
+
+        <section class="b-blog-inner__section b-top__section">
+            <div class="b-wrapper">
+                <div class="b-blog-inner__wrapper">
+                    <span class="b-blog-inner__date">{{ item.created|localizeddate('none', 'none', app.request.locale, "Europe/Moscow", "d MMMM Y") }}</span>
+                    <h1>{{ item.title }}</h1>
+                    <div class="js-blog-inner-text b-text">
+                        {{ item.description|raw }}
+                    </div>
+                </div>
+
+                {% if item.photos|length %}
+                <div class="js-gallery b-about-gallery">
+                    {% for photo in item.photos %}
+                    <div class="b-about-gallery__item">
+                        <img src="{% path photo.photo, 'default' %} }}" alt="">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="b-blog-inner__wrapper">
+                    <div class="js-blog-inner-text b-text">
+                        {{ item.description2|raw }}
+
+                        {% if item.video %}
+                            <div class="b-iframe">
+                                {% media item.video, 'default' %}
+                            </div>
+                        {% endif %}
+
+                        {{ item.description3|raw }}
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="b-navigator__section">
+            <div class="u-clear-fix b-wrapper">
+                {% if prev %}
+                    <a href="{{ path('blog_show', {slug: prev.url}) }}" title="{{ prev.title }}" class="b-navigator__prev">
+                        Предыдущая
+                    </a>
+                {% endif %}
+
+                <a href="{{ path('blog') }}" class="b-navigator__all">
+                    Все Статьи
+                </a>
+
+                {% if next %}
+                    <a href="{{ path('blog_show', {slug: next.url}) }}" title="{{ next.title }}" class="b-navigator__next">
+                        Следующая
+                    </a>
+                {% endif %}
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

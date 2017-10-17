@@ -1,0 +1,33 @@
+<div class="js-page-bar b-page-bar b-page-bar_l b-page-bar__hide">
+    <a href="#" class="js-call-menu b-menu-call">menu</a>
+    <a href="#" class="js-scroll-top b-scroll-top hidden">Наверх</a>
+</div>
+<div class="js-menu-overlay b-menu-overlay"></div>
+<div class="b-menu__box">
+    <a href="/" class="b-menu__logo"></a>
+    <ul class="b-menu">
+        <li>
+            <a href="{{ path('projects') }}" {% if app.request.get('_route') == 'projects' %}class="active"{% endif %}>Работы</a>
+        </li>
+        <li>
+            <a href="{{ path('about') }}" {% if app.request.get('_route') == 'about' %}class="active"{% endif %}>О нас</a>
+        </li>
+        <li>
+            <a href="#">Бриф онлайн</a>
+        </li>
+        <li>
+            <a href="{{ path('blog') }}" {% if app.request.get('_route') == 'blog' %}class="active"{% endif %}>Блог</a>
+        </li>
+        <li>
+            <a href="{{ path('contact') }}" {% if app.request.get('_route') == 'contact' %}class="active"{% endif %}>Контакты</a>
+        </li>
+    </ul>
+    <div class="b-menu__footer">
+        <p>
+            <a href="tel:{{ content('contacts.phone')|replace({' ':'', '(': '', ')': '', '-': ''}) }}">{{ content('contacts.phone') }}</a>
+        </p>
+        <p>
+            <a href="mailto:{{ content('contacts.email') }}">{{ content('contact.email') }}</a>
+        </p>
+    </div>
+</div>

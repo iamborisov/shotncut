@@ -1,0 +1,139 @@
+# Learn more about services, parameters and containers at
+# https://symfony.com/doc/current/service_container.html
+parameters:
+    #parameter_name: value
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        # automatically injects dependencies in your services
+        autowire: true
+        # automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true
+        # this means you cannot fetch services directly from the container via $container->get()
+        # if you need to do this, you can override this setting on individual services
+        public: false
+
+    # makes classes in src/AppBundle available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    AppBundle\:
+        resource: '../../src/AppBundle/*'
+        # you can exclude directories or files
+        # but if a service is unused, it's removed anyway
+        exclude: '../../src/AppBundle/{Entity,Repository,Tests,Twig}'
+
+    # controllers are imported separately to make sure they're public
+    # and have a tag that allows actions to type-hint services
+    AppBundle\Controller\:
+        resource: '../../src/AppBundle/Controller'
+        public: true
+        tags: ['controller.service_arguments']
+
+    app.twig_extension:
+        class: AppBundle\Twig\TwigExtension
+        public: false
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
+
+    gedmo.listener.sortable:
+        class: Gedmo\Sortable\SortableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]
+
+    admin.blog:
+        class: AppBundle\Admin\BlogAdmin
+        arguments: [~, AppBundle\Entity\Blog, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.blog }
+        public: true
+
+    admin.blog_photo:
+        class: AppBundle\Admin\BlogPhotoAdmin
+        arguments: [~, AppBundle\Entity\BlogPhoto, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+        public: true
+
+    admin.client:
+        class: AppBundle\Admin\ClientAdmin
+        arguments: [~, AppBundle\Entity\Client, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.clients }
+        public: true
+
+    admin.crew:
+        class: AppBundle\Admin\CrewAdmin
+        arguments: [~, AppBundle\Entity\Crew, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.crew }
+        public: true
+
+    admin.project:
+        class: AppBundle\Admin\ProjectAdmin
+        arguments: [~, AppBundle\Entity\Project, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.projects }
+        public: true
+
+    admin.project_photo:
+        class: AppBundle\Admin\ProjectPhotoAdmin
+        arguments: [~, AppBundle\Entity\ProjectPhoto, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, show_in_dashboard: false }
+        public: true
+
+    admin.project_type:
+        class: AppBundle\Admin\ProjectTypeAdmin
+        arguments: [~, AppBundle\Entity\ProjectType, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.project_types }
+        public: true
+
+    admin.gallery:
+        class: AppBundle\Admin\GalleryAdmin
+        arguments: [~, AppBundle\Entity\Gallery, 'PixSortableBehaviorBundle:SortableAdmin']
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.gallery }
+        public: true
+
+    admin.contacts:
+        class: AppBundle\Admin\ContactsAdmin
+        arguments: [~, AppBundle\Entity\Content, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.contacts }
+        public: true
+
+    admin.seo:
+        class: AppBundle\Admin\SeoAdmin
+        arguments: [~, AppBundle\Entity\Content, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.seo }
+        public: true
+
+    admin.page.index:
+        class: AppBundle\Admin\PageIndexAdmin
+        arguments: [~, AppBundle\Entity\Content, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.page.index }
+        public: true
+
+    admin.page.contact:
+        class: AppBundle\Admin\PageContactAdmin
+        arguments: [~, AppBundle\Entity\Content, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.page.contact }
+        public: true
+
+    admin.page.about:
+        class: AppBundle\Admin\PageAboutAdmin
+        arguments: [~, AppBundle\Entity\Content, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, label: admin.label.page.about }
+        public: true

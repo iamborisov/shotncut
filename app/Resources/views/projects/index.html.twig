@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="/js/pages/projects-list.js"></script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="js-content b-content">
+
+        <section class="b-top__section">
+            <div class="b-wrapper">
+                <ul class="u-clear-fix b-sort__box">
+                    <li>
+                        <a href="#" class="js-sort-link b-sort__link active" data-sort="all">Все</a>
+                    </li>
+
+                    {% for type in types %}
+                        <li>
+                            <a href="#" class="js-sort-link b-sort__link" data-sort="{{ type.name }}">{{ type.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </section>
+
+        <section class="b-projects-list__section">
+            <div class="b-wrapper">
+                <div class="u-clear-fix b-project__box">
+                    {% for project in projects %}
+                        <a href="{{ path('projects_show', {slug: project.url}) }}" data-project="{{ project.tagsData }}" class="js-project b-project">
+                            {% if project.background %}
+                                <div class="b-project__pic" style="background-image: url({% path project.background, 'list' %})"></div>
+                            {% elseif project.photos|length %}
+                                <div class="b-project__pic" style="background-image: url({% path project.photos.0, 'list' %})"></div>
+                            {% else %}
+                                <div class="b-project__pic" style="background-color: #444;"></div>
+                            {% endif %}
+
+                            <div class="b-project__text">
+                                <i>{{ project.year }}</i>
+                                <h3>{{ project.name }}</h3>
+                                <div class="b-project__text_desc">{{ project.annotation|raw }}</div>
+                                <ul class="u-clear-fix b-project__types">
+                                    {% for tag in project.tags %}
+                                        <li>{{ tag.title }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

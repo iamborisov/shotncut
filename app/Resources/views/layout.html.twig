@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Shot&Cut{% endblock %}</title>
+    <meta name="description" content="{{ content('seo.index.description') }}">
+    <meta name="keywords" content="{{ content('seo.index.keywords') }}">
+
+    <link rel="stylesheet" href="/css/jquery-ui.min.css" media="all">
+    <link rel="stylesheet" href="/css/common.css" media="all">
+    {% block stylesheets %}{% endblock %}
+
+    <script src="/js/libs/jquery-3.2.1.min.js"></script>
+    <script src="/js/libs/jquery-ui.js"></script>
+    <script src="/js/libs/jquery.ui.touch-punch.min.js"></script>
+    <script src="/js/libs/phone-mask.js"></script>
+    <script src="/js/libs/slick.js"></script>
+    <script src="/js/libs/canvas-video-player.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/pages/calc.js"></script>
+    {% block javascripts %}{% endblock %}
+</head>
+<body>
+    {% block background %}
+    {% endblock %}
+
+    {% block header %}
+        {% include '_header.html.twig' %}
+    {% endblock %}
+
+    {% block menu %}
+        {% include '_menu.html.twig' %}
+    {% endblock %}
+
+    {% block sidebar %}
+        {% include '_sidebar.html.twig' %}
+    {% endblock %}
+
+    {% block body %}
+    {% endblock %}
+
+    {% block footer %}
+        {% include '_footer.html.twig' %}
+    {% endblock %}
+
+    {% include '_calc.html.twig' %}
+</body>
+</html>

@@ -1,0 +1,92 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="/js/pages/project-inner.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="js-content b-content">
+
+        <section class="b-top__section">
+            <div class="b-wrapper">
+                <div class="b-project__top">
+                    {% if item.logo %}
+                        <div class="js-project-logo b-project__top_logo">
+                            <img src="{% path item.logo, 'default' %}" alt="">
+                        </div>
+                    {% endif %}
+
+                    <div class="b-project__top_text">
+                        <div class="js-project-text-top b-project__top_top">
+                            <div class="b-project__top_top_wrapper">
+                                <i class="b-project__top_date">{{ item.year }}</i>
+                                <h2>{{ item.name }}</h2>
+                            </div>
+                        </div>
+                        <div class="b-text">
+                            {{ item.description|raw }}
+                        </div>
+                        <ul class="u-clear-fix b-tags">
+                            {% for tag in item.tags %}
+                                <li>{{ tag.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="js-video b-video">
+                    {% if item.video %}
+                        <div class="b-iframe">
+                            {% media item.video, 'default' %}
+                        </div>
+                    {% endif %}
+
+                    <div class="u-clear-fix b-video__desc_box">
+
+                        {% if item.created %}
+                        <div class="b-video__desc b-video__desc_start">
+                            <span class="b-video__desc_label">Начало съёмок</span>
+                            <div class="b-video__desc_val">
+                                <span>{{ item.created|localizeddate('none', 'none', app.request.locale, "Europe/Moscow", "MMMM Y") }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if item.time %}
+                        <div class="b-video__desc b-video__desc_time">
+                            <span class="b-video__desc_label">Время создания</span>
+                            <div class="b-video__desc_val">
+                                <span>{{ item.time }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+
+                        {% if item.type %}
+                        <div class="b-video__desc b-video__desc_type">
+                            <span class="b-video__desc_label">Тип видео</span>
+                            <div class="b-video__desc_val">
+                                {% for type in item.types %}
+                                    <span>{{ type }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="b-backstage__section">
+            <div class="b-wrapper">
+                <h3>Backstage</h3>
+                <div class="u-clear-fix b-backstage__box">
+                    {% for photo in item.photos %}
+                        <div class="js-backstage b-backstage" style="background-image: url({% path photo.photo, 'default' %} }})"></div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}

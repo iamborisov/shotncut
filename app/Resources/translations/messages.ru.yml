@@ -1,0 +1,42 @@
+move_to_bottom: В конец
+move_to_top: В начало
+move_down: Ниже
+move_up: Выше
+
+admin.label.blog: Блог
+admin.label.clients: Клиенты
+admin.label.crew: Команда
+admin.label.projects: Проекты
+admin.label.project_types: Типы проектов
+admin.label.gallery: Галерея
+admin.label.contacts: Контакты
+admin.label.page.index: Главная
+admin.label.page.contact: Контакты
+admin.label.page.about: О нас
+admin.label.seo: SEO
+
+Project List: Проекты
+Crew List: Команда
+Client List: Клиенты
+Blog List: Записи блога
+
+Action: ""
+Display: Отображать
+Name: Название
+Title: Заголовок
+Annotation: Краткое описание
+Description: Описание
+Description2: Описание (после фотографий)
+Description3: Описание (после видео)
+Logo: Логотип
+Photo: Фотография
+Photos: Фотографии
+Video: Видео
+Year: Год
+Tags: Типы проекта
+Time: Время создания
+Created: Дата
+Background: Фон
+Url: Ссылка
+Job: Должность
+Value: Значение

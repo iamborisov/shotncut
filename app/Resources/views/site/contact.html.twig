@@ -1,0 +1,63 @@
+{% extends 'layout.html.twig' %}
+
+{% block javascripts %}
+    <script src="/js/pages/contact.js"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="js-content b-content">
+
+        <section class="b-top__section b-contact__section">
+            <div class="b-wrapper">
+                <div class="b-contact__top b-text">
+                    {% content 'contact.title' %}
+                    <h1>Мы всегда рады вам</h1>
+                    <p>
+                        Если для вашего проекта необходим видеооператор в Крыму, Москве или Санкт-Петербурге, мы всегда открыты
+                        к сотрудничеству.
+                    </p>
+                    {% endcontent %}
+                </div>
+                <div class="u-clear-fix b-contact__column">
+                    <div class="b-contact-links__box">
+                        <h5>Наши контакты</h5>
+                        <ul class="b-contact-links">
+                            <li class="b-contact-links__email">
+                                <a href="mailto:{{ content('contacts.email') }}">{{ content('contacts.email') }}</a>
+                            </li>
+                            <li class="b-contact-links__phone">
+                                <a href="tel:{{ content('contacts.phone')|replace({' ':'', '(': '', ')': '', '-': ''}) }}">{{ content('contacts.phone') }}</a>
+                            </li>
+                            <li class="b-contact-links__address">
+                                <span>
+                                    {{ content('contacts.country') }},
+                                    {{ content('contacts.address') }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="b-contact-form__box">
+                        <h5>Напишите нам</h5>
+                        <form action="{{ path('contact_send') }}" class="js-contact-form b-contact-form" id="contact_form" autocomplete="off">
+                            <div class="u-clear-fix b-contact-form__column">
+                                <input type="text" id="contact_name" name="contact[name]" class="js-required b-input" placeholder="Ваше имя">
+                                <input type="email" id="contact_email" name="contact[email]" class="js-required b-input email" placeholder="Ваш Email">
+                            </div>
+                            <textarea id="contact_text" name="contact[text]" class="js-required b-input" placeholder="Ваше сообщение"></textarea>
+                            <div class="b-button__box">
+                                <button type="submit" class="b-button" disabled>Отправить</button>
+                            </div>
+                        </form>
+                        <div class="js-contact-form-error b-contact-form__alert hidden">
+                            Возникла ошибка.<br>Повторите попытку позже.
+                        </div>
+                        <h6 class="js-contact-form-success b-contact-form__alert hidden">
+                            Спасибо!<br>В ближайшее время мы свяжемся с вами.
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+{% endblock %}
