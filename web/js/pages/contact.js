@@ -80,6 +80,7 @@ $(function () {
     $('input, textarea', $form).val('').trigger('change');
     setTimeout(function () {
       $successField.addClass('hidden');
+      $form.removeClass('hidden');
     }, 3000);
   }
 
