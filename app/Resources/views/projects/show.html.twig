@@ -36,9 +36,7 @@
 
                 <div class="js-video b-video">
                     {% if item.video %}
-                        <div class="b-iframe">
-                            {% media item.video, 'default' %}
-                        </div>
+                        {% media item.video, 'default' %}
                     {% endif %}
 
                     <div class="u-clear-fix b-video__desc_box">

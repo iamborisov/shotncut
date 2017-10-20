@@ -22,9 +22,11 @@
                 <div class="js-blog-append u-clear-fix b-blog__box">
                     {% include 'blog/_items.html.twig' with {items: items} %}
                 </div>
-                <div class="b-button__box b-button__box_more">
-                    <a href="#" data-action="{{ path('blog_page') }}" class="js-show-blog b-button">Показать еще</a>
-                </div>
+                {% if more %}
+                    <div class="b-button__box b-button__box_more">
+                        <a href="#" data-action="{{ path('blog_page') }}" class="js-show-blog b-button">Показать еще</a>
+                    </div>
+                {% endif %}
             </div>
         </section>
 

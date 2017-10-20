@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use Doctrine\ORM\QueryBuilder;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,8 +26,14 @@ class BlogController extends Controller
                 self::PAGE_SIZE
             );
 
+        /** @var QueryBuilder $qb */
+        $qb = $this->getDoctrine()->getRepository('AppBundle:Blog')->createQueryBuilder('b');
+        $qb->select('COUNT(b.id)')->where('b.display = true');
+        $count = (int) $qb->getQuery()->getSingleScalarResult();
+
         return $this->render('blog/index.html.twig', [
             'items' => $blog,
+            'more' => $count > self::PAGE_SIZE
         ]);
     }
 

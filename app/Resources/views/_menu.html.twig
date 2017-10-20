@@ -13,7 +13,7 @@
             <a href="{{ path('about') }}" {% if app.request.get('_route') == 'about' %}class="active"{% endif %}>О нас</a>
         </li>
         <li>
-            <a href="#">Бриф онлайн</a>
+            <a href="#" class="js-call-calc">Бриф онлайн</a>
         </li>
         <li>
             <a href="{{ path('blog') }}" {% if app.request.get('_route') == 'blog' %}class="active"{% endif %}>Блог</a>
@@ -27,7 +27,7 @@
             <a href="tel:{{ content('contacts.phone')|replace({' ':'', '(': '', ')': '', '-': ''}) }}">{{ content('contacts.phone') }}</a>
         </p>
         <p>
-            <a href="mailto:{{ content('contacts.email') }}">{{ content('contact.email') }}</a>
+            <a href="mailto:{{ content('contacts.email') }}">{{ content('contacts.email') }}</a>
         </p>
     </div>
 </div>
