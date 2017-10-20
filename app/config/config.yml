@@ -174,7 +174,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                default: { width: 210 , quality: 90}
+                default: { height: 115 , quality: 90}
 
         crew.photo:
             providers:
@@ -198,7 +198,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.image
             formats:
-                default: { height: 115 , quality: 90}
+                default: { width: 210 , quality: 90}
 
         project.video:
             providers:
