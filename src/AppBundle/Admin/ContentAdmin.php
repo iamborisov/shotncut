@@ -39,7 +39,7 @@ abstract class ContentAdmin extends AbstractAdmin
         if ($this->richEdit) {
             $formMapper->add('value', 'sonata_simple_formatter_type', [
                 'format' => 'richhtml',
-                'attr'   => ['class' => 'ckeditor'],
+                'ckeditor_context' => 'default'
             ]);
         } else {
             $formMapper->add('value', 'text');

@@ -35,13 +35,13 @@ class BlogAdmin extends AbstractAdmin
 
         $formMapper->add('annotation', 'sonata_simple_formatter_type', [
             'format' => 'richhtml',
-            'attr'   => ['class' => 'ckeditor'],
+            'ckeditor_context' => 'default'
         ]);
 
         $formMapper->add('description', 'sonata_simple_formatter_type', [
             'required' => false,
             'format' => 'richhtml',
-            'attr'   => ['class' => 'ckeditor'],
+            'ckeditor_context' => 'default'
         ]);
 
         $formMapper->add('photos', 'sonata_type_collection', [
@@ -55,7 +55,7 @@ class BlogAdmin extends AbstractAdmin
         $formMapper->add('description2', 'sonata_simple_formatter_type', [
             'required' => false,
             'format' => 'richhtml',
-            'attr'   => ['class' => 'ckeditor'],
+            'ckeditor_context' => 'default'
         ]);
 
         $formMapper->add('video', 'sonata_type_model_list', [
@@ -67,7 +67,7 @@ class BlogAdmin extends AbstractAdmin
         $formMapper->add('description3', 'sonata_simple_formatter_type', [
             'required' => false,
             'format' => 'richhtml',
-            'attr'   => ['class' => 'ckeditor'],
+            'ckeditor_context' => 'default'
         ]);
     }
 
