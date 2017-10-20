@@ -68,7 +68,13 @@ class ProjectType
      */
     public function __toString()
     {
-        return $this->getName() ? $this->getName() : '';
+        return $this->getTitle()
+            ? $this->getTitle()
+            : (
+                $this->getName()
+                    ? $this->getName()
+                    : ''
+            );
     }
 
     /**

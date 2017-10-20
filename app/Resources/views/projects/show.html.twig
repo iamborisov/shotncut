@@ -80,7 +80,7 @@
                 <h3>Backstage</h3>
                 <div class="u-clear-fix b-backstage__box">
                     {% for photo in item.photos %}
-                        <div class="js-backstage b-backstage" style="background-image: url({% path photo.photo, 'default' %} }})"></div>
+                        <div class="js-backstage b-backstage" style="background-image: url('{% path photo.photo, 'default' %}')"></div>
                     {% endfor %}
                 </div>
             </div>

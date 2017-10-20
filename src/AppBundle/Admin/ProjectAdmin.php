@@ -74,10 +74,6 @@ class ProjectAdmin extends AbstractAdmin
             'required'  => false,
         ]);
 
-        $formMapper->add('year', 'number', [
-            'required' => false,
-        ]);
-
         $formMapper->add('created', 'date', [
             'required' => false,
         ]);

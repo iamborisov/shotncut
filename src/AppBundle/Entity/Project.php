@@ -76,11 +76,6 @@ class Project
     private $photos;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $year;
-
-    /**
      * @var AppBundle\Entity\ProjectType
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ProjectType", cascade={"persist"})
@@ -225,27 +220,13 @@ class Project
     }
 
     /**
-     * Set year
-     *
-     * @param integer $year
-     *
-     * @return Project
-     */
-    public function setYear($year)
-    {
-        $this->year = $year;
-
-        return $this;
-    }
-
-    /**
      * Get year
      *
      * @return integer
      */
     public function getYear()
     {
-        return $this->year ? $this->year : date('Y');
+        return $this->getCreated()->format('Y');
     }
 
     /**
