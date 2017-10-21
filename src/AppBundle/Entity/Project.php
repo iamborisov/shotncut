@@ -51,13 +51,6 @@ class Project
      *
      * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
      */
-    private $background;
-
-    /**
-     * @var Application\Sonata\MediaBundle\Entity\Media
-     *
-     * @ORM\ManyToOne(targetEntity="Application\Sonata\MediaBundle\Entity\Media")
-     */
     private $logo;
 
     /**
@@ -427,30 +420,6 @@ class Project
     public function getPosition()
     {
         return $this->position;
-    }
-
-    /**
-     * Set background
-     *
-     * @param \Application\Sonata\MediaBundle\Entity\Media $background
-     *
-     * @return Project
-     */
-    public function setBackground(\Application\Sonata\MediaBundle\Entity\Media $background = null)
-    {
-        $this->background = $background;
-
-        return $this;
-    }
-
-    /**
-     * Get background
-     *
-     * @return \Application\Sonata\MediaBundle\Entity\Media
-     */
-    public function getBackground()
-    {
-        return $this->background;
     }
 
     /**

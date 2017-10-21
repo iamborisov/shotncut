@@ -29,9 +29,7 @@
                 <div class="u-clear-fix b-project__box">
                     {% for project in projects %}
                         <a href="{{ path('projects_show', {slug: project.url}) }}" data-project="{{ project.tagsData }}" class="js-project b-project">
-                            {% if project.background %}
-                                <div class="b-project__pic" style="background-image: url({% path project.background, 'list' %})"></div>
-                            {% elseif project.photos.count %}
+                            {% if project.photos.count %}
                                 <div class="b-project__pic" style="background-image: url({% path project.photos.get(0).photo, 'list' %})"></div>
                             {% else %}
                                 <div class="b-project__pic" style="background-color: #444;"></div>

@@ -26,11 +26,6 @@
                         <div class="b-text">
                             {{ item.description|raw }}
                         </div>
-                        <ul class="u-clear-fix b-tags">
-                            {% for tag in item.tags %}
-                                <li>{{ tag.title }}</li>
-                            {% endfor %}
-                        </ul>
                     </div>
                 </div>
 
@@ -59,12 +54,12 @@
                         </div>
                         {% endif %}
 
-                        {% if item.type %}
+                        {% if item.tags.count %}
                         <div class="b-video__desc b-video__desc_type">
                             <span class="b-video__desc_label">Тип видео</span>
                             <div class="b-video__desc_val">
-                                {% for type in item.types %}
-                                    <span>{{ type }}</span>
+                                {% for tag in item.tags %}
+                                    <span>{{ tag }}</span>
                                 {% endfor %}
                             </div>
                         </div>

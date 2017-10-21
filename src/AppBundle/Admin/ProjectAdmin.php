@@ -37,12 +37,6 @@ class ProjectAdmin extends AbstractAdmin
             'link_parameters' => ['context' => 'default']
         ]);
 
-        $formMapper->add('background', 'sonata_type_model_list', [
-            'required' => false,
-        ], [
-            'link_parameters' => ['context' => 'default']
-        ]);
-
         $formMapper->add('annotation', 'sonata_simple_formatter_type', [
             'format' => 'richhtml',
             'ckeditor_context' => 'default'
