@@ -2,26 +2,23 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Client;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class SiteController extends Controller
 {
     /**
      * @Route("/", name="homepage")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $clients = $this->getDoctrine()
-            ->getRepository('AppBundle:Client')
-            ->findBy([
-                'display' => true
-            ], [
-                'position' => 'ASC'
-            ]);
+            ->getRepository(Client::class)
+            ->findAllVisible();
 
         return $this->render('site/index.html.twig', [
             'clients' => $clients

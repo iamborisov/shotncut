@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\SortablePosition;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ClientRepository")
  * @ORM\Table(name="client")
  */
 class Client
