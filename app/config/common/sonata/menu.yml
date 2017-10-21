@@ -1,0 +1,41 @@
+# Sonata Admin Menu Configuration
+
+sonata_admin:
+    dashboard:
+        groups:
+
+#########################################
+## Content
+#########################################
+
+            app.admin.group.content:
+                label: admin.label.content
+                items:
+                    - admin.blog
+                    - admin.client
+                    - admin.crew
+                    - admin.project
+                    - admin.gallery
+
+#########################################
+## Blocks
+#########################################
+
+            app.admin.group.pages:
+                label: admin.label.page
+                items:
+                    - admin.page.index
+                    - admin.page.contact
+                    - admin.page.about
+
+#########################################
+## Settings
+#########################################
+
+            app.admin.group.settings:
+                label: admin.label.settings
+                items:
+                    - admin.seo
+                    - admin.project_type
+                    - admin.contacts
+                    - sonata.media.admin.media

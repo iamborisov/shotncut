@@ -1,0 +1,129 @@
+# Sonata Media Configuration
+
+sonata_media:
+
+#############################################
+## Storage
+#############################################
+
+    db_driver: doctrine_orm
+    cdn:
+        server:
+            path: /uploads/media
+    filesystem:
+        local:
+            directory:  "%kernel.root_dir%/../web/uploads/media"
+            create:     false
+
+#############################################
+## Context
+#############################################
+
+    default_context: default
+    contexts:
+        default:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+                - sonata.media.provider.vimeo
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+
+    #########################################
+    ## Blog
+    #########################################
+
+        blog.background:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+                - sonata.media.provider.vimeo
+            formats:
+                default: { width: 1920 , quality: 60}
+                list: { width: 490, height: 342 , quality: 80}
+
+        blog.photo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                default: { width: 1920 , quality: 60}
+
+        blog.video:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.file
+                - sonata.media.provider.vimeo
+            formats:
+                default: { width: 600 }
+
+    #########################################
+    ## Client
+    #########################################
+
+        client.logo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                default: { height: 115 , quality: 90}
+
+    #########################################
+    ## Crew
+    #########################################
+
+        crew.photo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                default: { width: 180, height: 180 , quality: 70}
+
+    #########################################
+    ## Gallery
+    #########################################
+
+        gallery.photo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                default: { height: 900 , quality: 80}
+
+    #########################################
+    ## Projects
+    #########################################
+
+        project.photo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                default: { width: 1920 , quality: 60}
+
+        project.logo:
+            providers:
+                - sonata.media.provider.image
+            formats:
+                default: { width: 210 , quality: 90}
+
+        project.video:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.file
+                - sonata.media.provider.vimeo
+            formats:
+                default: { width: 600 }
+
+        project.background:
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+                - sonata.media.provider.vimeo
+            formats:
+                default: { width: 1920 , quality: 60}
+                list: { width: 490, height: 342 , quality: 80}

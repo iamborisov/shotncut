@@ -1,7 +1,7 @@
 /.idea/
 /web/uploads/
 /.web-server-pid
-/app/config/parameters.yml
+/app/config/common/parameters.yml
 /build/
 /phpunit.xml
 /var/*
