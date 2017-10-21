@@ -49,11 +49,6 @@ sonata_media:
                     width: 210
                     quality: 90
 
-                # Client logo
-                client:
-                    height: 115
-                    quality: 90
-
                 # Employee photo
                 crew:
                     width: 180
