@@ -6,6 +6,7 @@ use AppBundle\Entity\Project;
 use AppBundle\Entity\ProjectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProjectsController extends Controller
 {
@@ -16,17 +17,14 @@ class ProjectsController extends Controller
      */
     public function indexAction()
     {
-        $types = $this->getDoctrine()
-            ->getRepository(ProjectType::class)
-            ->findAll();
-
-        $projects = $this->getDoctrine()
-            ->getRepository(Project::class)
-            ->findAllVisible();
-
         return $this->render('projects/index.html.twig', [
-            'projects' => $projects,
-            'types' => $types,
+            'projects' => $this->getDoctrine()
+                ->getRepository(Project::class)
+                ->findAllVisible(),
+
+            'types' => $this->getDoctrine()
+                ->getRepository(ProjectType::class)
+                ->findAll(),
         ]);
     }
 
