@@ -6,3 +6,79 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    mailer.contact:
+        class: AppBundle\Service\MailerService
+        properties:
+            subject: "Обратная связь"
+            recipient: "contacts.email.contact"
+            sender: "contacts.email.from"
+            template: "email/contact.txt.twig"
+            contentType: "text/plain"
+            required:
+                - name
+                - email
+                - text
+            fields:
+                name: ""
+                email: ""
+                text: ""
+            
+    mailer.calc:
+        class: AppBundle\Service\MailerService
+        properties:
+            subject: "Запрос на бриф"
+            recipient: "contacts.email.calc"
+            sender: "contacts.email.from"
+            template: "email/calc.txt.twig"
+            contentType: "text/plain"
+            required:
+                - date
+                - email
+                - common_price
+            fields:
+                email: ""
+                common_price: ""
+                date: ""
+                type: ""
+                type_other: ""
+                audience: ""
+                aim: ""
+                time: ""
+                deadline: ""
+                example_1: ""
+                example_2: ""
+                example_3: ""
+                idea: []
+                scenario: []
+                heroes: ""
+                heroes_prof: ""
+                heroes_not_prof: ""
+                hero_search: ""
+                visagiste: ""
+                stylist: ""
+                storyboard: ""
+                days: ""
+                equipment[]: []
+                equipment_other: ""
+                team: ""
+                montage: ""
+                color: ""
+                sound: ""
+                music: ""
+                music_other: ""
+                speaker: ""
+                speaker_lg: []
+                copywriter: ""
+                animation: ""
+                animation_other: ""
+                branding: ""
+                branding_other: ""
+                social: []
+                social_other: ""
