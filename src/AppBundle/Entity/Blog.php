@@ -83,6 +83,16 @@ class Blog
     private $created;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $metaDescription;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $metaKeywords;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -373,5 +383,37 @@ class Blog
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetaDescription()
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * @param mixed $metaDescription
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMetaKeywords()
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * @param mixed $metaKeywords
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->metaKeywords = $metaKeywords;
     }
 }

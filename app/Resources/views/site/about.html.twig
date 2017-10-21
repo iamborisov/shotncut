@@ -1,5 +1,10 @@
 {% extends 'layout.html.twig' %}
 
+{% block meta %}
+    {{ seo('description', 'about') }}
+    {{ seo('keywords', 'about') }}
+{% endblock %}
+
 {% block javascripts %}
     <script src="/js/pages/about.js"></script>
 {% endblock %}

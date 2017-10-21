@@ -91,6 +91,15 @@ class Project
      */
     private $position;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $metaDescription;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $metaKeywords;
 
     /**
      * Constructor
@@ -442,5 +451,37 @@ class Project
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaDescription()
+    {
+        return $this->metaDescription;
+    }
+
+    /**
+     * @param string $metaDescription
+     */
+    public function setMetaDescription($metaDescription)
+    {
+        $this->metaDescription = $metaDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaKeywords()
+    {
+        return $this->metaKeywords;
+    }
+
+    /**
+     * @param string $metaKeywords
+     */
+    public function setMetaKeywords($metaKeywords)
+    {
+        $this->metaKeywords = $metaKeywords;
     }
 }

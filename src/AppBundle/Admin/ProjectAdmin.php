@@ -75,6 +75,14 @@ class ProjectAdmin extends AbstractAdmin
         $formMapper->add('time', 'text', [
             'required' => false,
         ]);
+
+        $formMapper->add('metaDescription', 'text', [
+            'required' => false,
+        ]);
+
+        $formMapper->add('metaKeywords', 'text', [
+            'required' => false,
+        ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

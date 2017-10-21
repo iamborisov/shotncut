@@ -69,6 +69,14 @@ class BlogAdmin extends AbstractAdmin
             'format' => 'richhtml',
             'ckeditor_context' => 'default'
         ]);
+
+        $formMapper->add('metaDescription', 'text', [
+            'required' => false,
+        ]);
+
+        $formMapper->add('metaKeywords', 'text', [
+            'required' => false,
+        ]);
     }
 
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)

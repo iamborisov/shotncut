@@ -1,5 +1,10 @@
 {% extends 'layout.html.twig' %}
 
+{% block meta %}
+    {{ seo('description', 'project', item.metaDescription) }}
+    {{ seo('keywords', 'project', item.metaKeywords) }}
+{% endblock %}
+
 {% block javascripts %}
     <script src="/js/pages/blog-inner.js"></script>
 {% endblock %}

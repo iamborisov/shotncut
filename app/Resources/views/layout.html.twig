@@ -5,8 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Shot&Cut{% endblock %}</title>
-    <meta name="description" content="{{ content('seo.index.description') }}">
-    <meta name="keywords" content="{{ content('seo.index.keywords') }}">
+    {% block meta %}{% endblock %}
 
     <link rel="stylesheet" href="/css/jquery-ui.min.css" media="all">
     <link rel="stylesheet" href="/css/common.css" media="all">
