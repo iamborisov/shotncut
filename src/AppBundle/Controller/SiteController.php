@@ -3,9 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Client;
+use AppBundle\Entity\Crew;
+use AppBundle\Entity\Gallery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class SiteController extends Controller
 {
@@ -16,35 +17,28 @@ class SiteController extends Controller
      */
     public function indexAction()
     {
-        $clients = $this->getDoctrine()
-            ->getRepository(Client::class)
-            ->findAllVisible();
-
         return $this->render('site/index.html.twig', [
-            'clients' => $clients
+            'clients' => $this->getDoctrine()
+                ->getRepository(Client::class)
+                ->findAllVisible()
         ]);
     }
 
     /**
      * @Route("/about/", name="about")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function aboutAction(Request $request)
+    public function aboutAction()
     {
-        $crew = $this->getDoctrine()
-            ->getRepository('AppBundle:Crew')
-            ->findAllVisible();
-
-        $gallery = $this->getDoctrine()
-            ->getRepository('AppBundle:Gallery')
-            ->findBy([
-                'display' => true
-            ], [
-                'position' => 'ASC'
-            ]);
-
         return $this->render('site/about.html.twig', [
-            'crew' => $crew,
-            'gallery' => $gallery
+            'crew' => $this->getDoctrine()
+                ->getRepository(Crew::class)
+                ->findAllVisible(),
+
+            'gallery' => $this->getDoctrine()
+                ->getRepository(Gallery::class)
+                ->findAllVisible()
         ]);
     }
 }
