@@ -12,9 +12,6 @@ $(function () {
   var $indexProduct = $('.js-index-product');
   var $indexProductBox = $('.js-index-product-box');
   var $clientCarousel = $('.js-clients-carousel');
-  var $clientSection = $('.js-clients-section');
-  var $clientBg = $('.js-clients-bg');
-  var heightClientBg = $clientBg.height();
   var $canvasVideoBox = $('.js-canvas-box');
 
   var isIOS = /iPad|iPhone|iPod/.test(navigator.platform);
@@ -65,19 +62,6 @@ $(function () {
   }
   setDef();
 
-  /**
-   * scroll clients bg text
-   */
-  function scrollBgClietns() {
-    var clientSectionVals = $clientSection[0].getBoundingClientRect();
-
-    if (clientSectionVals.top <= windowHeight && clientSectionVals.top >= 0 ){
-      var coef = parseInt(heightClientBg / windowHeight);
-      var move = parseInt(( windowHeight - clientSectionVals.top ) * coef);
-      $clientBg.css('transform', 'translate(0, -'+move+'px)');
-    }
-  }
-  scrollBgClietns();
   
   /**
    * set height to product's box
@@ -152,14 +136,14 @@ $(function () {
 
 
   $(window).on('scroll', function () {
-    scrollBgClietns();
+
   });
 
   $(window).on('resize', function () {
     windowHeight = $(window).height();
     windowWidth = $(window).width();
     productsHeight();
-    scrollBgClietns();
+
   });
 
 });
