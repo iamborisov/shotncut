@@ -32,11 +32,7 @@ class SiteController extends Controller
     {
         $crew = $this->getDoctrine()
             ->getRepository('AppBundle:Crew')
-            ->findBy([
-                'display' => true
-            ], [
-                'position' => 'ASC'
-            ]);
+            ->findAllVisible();
 
         $gallery = $this->getDoctrine()
             ->getRepository('AppBundle:Gallery')
