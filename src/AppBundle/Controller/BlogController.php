@@ -2,7 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use Doctrine\ORM\QueryBuilder;
+use AppBundle\Entity\Blog;
+use AppBundle\Repository\BlogRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,111 +12,78 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BlogController extends Controller
 {
-    const PAGE_SIZE = 6;
-
     /**
      * @Route("/blog/", name="blog")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $blog = $this->getDoctrine()
-            ->getRepository('AppBundle:Blog')
-            ->findBy(
-                ['display' => true],
-                ['id' => 'DESC'],
-                self::PAGE_SIZE
-            );
-
-        /** @var QueryBuilder $qb */
-        $qb = $this->getDoctrine()->getRepository('AppBundle:Blog')->createQueryBuilder('b');
-        $qb->select('COUNT(b.id)')->where('b.display = true');
-        $count = (int) $qb->getQuery()->getSingleScalarResult();
+        /** @var BlogRepository $blogRepository */
+        $blogRepository = $this->getDoctrine()->getRepository(Blog::class);
 
         return $this->render('blog/index.html.twig', [
-            'items' => $blog,
-            'more' => $count > self::PAGE_SIZE
+            'items' => $blogRepository->findAllByPage(1),
+            'more' => $blogRepository->countPages() > 1
         ]);
     }
 
     /**
      * @Route("/blog/page/", name="blog_page")
+     *
+     * @param Request $request
+     * @return JsonResponse
      */
     public function pageAction(Request $request)
     {
-        $page = max((int)$request->get('pageNum', 1), 1);
+        /** @var int $pageNum */
+        $pageNum = max((int)$request->get('pageNum', 1), 1);
 
-        $blog = $this->getDoctrine()
-            ->getRepository('AppBundle:Blog')
-            ->findBy(
-                ['display' => true],
-                ['id' => 'DESC'],
-                self::PAGE_SIZE,
-                self::PAGE_SIZE * ($page - 1)
-            );
+        /** @var Blog[] $items */
+        $items = $this->getDoctrine()
+            ->getRepository(Blog::class)
+            ->findAllByPage($pageNum);
 
-        if (count($blog)) {
-            return new JsonResponse([
-                'html' => $this->render('blog/_items.html.twig', [
-                    'items' => $blog,
-                ]),
-                'page' => $page + 1,
-                'result' => 'ok'
+        /** @var array $response */
+        $response = [
+            'html' => '',
+            'page' => 0,
+            'result' => 'ok'
+        ];
+
+        if (count($items)) {
+            $response['html'] = $this->render('blog/_items.html.twig', [
+                'items' => $items,
             ]);
-        } else {
-            return new JsonResponse([
-                'html' => '',
-                'page' => 0,
-                'result' => 'ok'
-            ]);
+
+            $response['page'] = $pageNum + 1;
         }
 
+        return new JsonResponse($response);
     }
 
     /**
      * @Route("/blog/{slug}/", name="blog_show")
+     *
+     * @param string $slug
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Request $request, $slug)
+    public function showAction($slug)
     {
-        $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Blog')
-            ->findOneBy(['url' => $slug]);
+        /** @var BlogRepository $blogRepository */
+        $blogRepository = $this->getDoctrine()->getRepository(Blog::class);
 
-        if (is_null($item) || !$item->getDisplay()) {
+        /** @var Blog $item */
+        $item = $blogRepository->findByUrl($slug);
+
+        if (!$item) {
             throw new NotFoundHttpException();
         }
 
         return $this->render('blog/show.html.twig', [
             'item' => $item,
-            'prev' => $this->getPrevBlog($item->getId()),
-            'next' => $this->getNextBlog($item->getId())
+            'prev' => $blogRepository->findPreviousById($item->getId()),
+            'next' => $blogRepository->findNextById($item->getId())
         ]);
-    }
-
-    protected function getNextBlog($id) {
-        $cNext = new \Doctrine\Common\Collections\Criteria();
-        $cNext->where($cNext->expr()->eq('display', true))
-            ->andWhere($cNext->expr()->gt('id', $id))
-            ->setMaxResults(1)
-            ->orderBy(["id" => $cNext::ASC]);
-
-        $next = $this->getDoctrine()
-            ->getRepository('AppBundle:Blog')
-            ->matching($cNext);
-
-        return count($next) ? $next[0] : false;
-    }
-
-    protected function getPrevBlog($id) {
-        $cPrev = new \Doctrine\Common\Collections\Criteria();
-        $cPrev->where($cPrev->expr()->eq('display', true))
-            ->andWhere($cPrev->expr()->lt('id', $id))
-            ->setMaxResults(1)
-            ->orderBy(["id" => $cPrev::DESC]);
-
-        $prev = $this->getDoctrine()
-            ->getRepository('AppBundle:Blog')
-            ->matching($cPrev);
-
-        return count($prev) ? $prev[0] : false;
     }
 }

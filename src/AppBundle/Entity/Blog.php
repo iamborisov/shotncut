@@ -7,7 +7,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\BlogRepository")
  * @ORM\Table(name="blog")
  */
 class Blog
