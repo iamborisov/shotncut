@@ -25,7 +25,7 @@ $(function () {
 
   function getHash() {
     var hash = window.location.hash.replace('#','');
-    if ($('.js-sort-link[data-sort='+hash+']').length )
+    if (hash != '' && $('.js-sort-link[data-sort='+hash+']').length )
       sort(hash, $('.js-sort-link[data-sort='+hash+']'));
   }
   getHash();
