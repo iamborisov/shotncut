@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Entity\Blog;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NoResultException;
 
 class BlogRepository extends EntityRepository
 {
@@ -29,17 +30,21 @@ class BlogRepository extends EntityRepository
      * @return Blog
      */
     public function findByUrl($url) {
-        return $this->getEntityManager()
-            ->createQuery('
-                SELECT b
-                FROM AppBundle:Blog b
-                WHERE
-                  b.display = TRUE
-                  AND
-                  b.slug = :url')
-            ->setParameter('url', $url)
-            ->setMaxResults(1)
-            ->getSingleResult();
+        try {
+            return $this->getEntityManager()
+                ->createQuery('
+                    SELECT b
+                    FROM AppBundle:Blog b
+                    WHERE
+                      b.display = TRUE
+                      AND
+                      b.url = :url')
+                ->setParameter('url', $url)
+                ->setMaxResults(1)
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 
     /**
@@ -47,18 +52,22 @@ class BlogRepository extends EntityRepository
      * @return Blog
      */
     public function findNextById($id) {
-        return $this->getEntityManager()
-            ->createQuery('
-                SELECT b
-                FROM AppBundle:Blog b
-                WHERE
-                  b.display = TRUE
-                  AND
-                  b.id > :id
-                ORDER b.id ASC')
-            ->setParameter('id', $id)
-            ->setMaxResults(1)
-            ->getSingleResult();
+        try {
+            return $this->getEntityManager()
+                ->createQuery('
+                    SELECT b
+                    FROM AppBundle:Blog b
+                    WHERE
+                      b.display = TRUE
+                      AND
+                      b.id > :id
+                    ORDER BY b.id ASC')
+                ->setParameter('id', $id)
+                ->setMaxResults(1)
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 
     /**
@@ -66,18 +75,22 @@ class BlogRepository extends EntityRepository
      * @return Blog
      */
     public function findPreviousById($id) {
-        return $this->getEntityManager()
-            ->createQuery('
-                SELECT b
-                FROM AppBundle:Blog b
-                WHERE
-                  b.display = TRUE
-                  AND
-                  b.id < :id
-                ORDER b.id DESC')
-            ->setParameter('id', $id)
-            ->setMaxResults(1)
-            ->getSingleResult();
+        try {
+            return $this->getEntityManager()
+                ->createQuery('
+                    SELECT b
+                    FROM AppBundle:Blog b
+                    WHERE
+                      b.display = TRUE
+                      AND
+                      b.id < :id
+                    ORDER BY b.id DESC')
+                ->setParameter('id', $id)
+                ->setMaxResults(1)
+                ->getSingleResult();
+        } catch (NoResultException $e) {
+            return null;
+        }
     }
 
     /**
