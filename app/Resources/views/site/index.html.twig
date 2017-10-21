@@ -50,7 +50,7 @@
                         <div class="b-index-product__line b-index-product__line_4"></div>
                         <div class="b-index-product__text">
                             <h4>Реклама</h4>
-                            <p>{{ content('index.adv') }}</p>
+                            <p>{{ content('index.adv')|raw }}</p>
                         </div>
                     </a>
                     <a href="{{ path('projects') }}#documentary" class="js-index-product b-index-product long documentary">
@@ -60,7 +60,7 @@
                         <div class="b-index-product__line b-index-product__line_4"></div>
                         <div class="b-index-product__text">
                             <h4>Корпоративное видео</h4>
-                            <p>{{ content('index.corp') }}</p>
+                            <p>{{ content('index.corp')|raw }}</p>
                         </div>
                     </a>
                     <a href="{{ path('projects') }}#food" class="js-index-product b-index-product food">
@@ -70,7 +70,7 @@
                         <div class="b-index-product__line b-index-product__line_4"></div>
                         <div class="b-index-product__text">
                             <h4>Food-съемка</h4>
-                            <p>{{ content('index.food') }}</p>
+                            <p>{{ content('index.food')|raw }}</p>
                         </div>
                     </a>
                     <a href="{{ path('projects') }}#nocomers" class="js-index-product b-index-product long nocomers">
@@ -80,7 +80,7 @@
                         <div class="b-index-product__line b-index-product__line_4"></div>
                         <div class="b-index-product__text">
                             <h4>Некоммерческое видео</h4>
-                            <p>{{ content('index.free') }}</p>
+                            <p>{{ content('index.free')|raw }}</p>
                         </div>
                     </a>
                     <a href="{{ path('projects') }}#fashion" class="js-index-product b-index-product fashion">
@@ -90,7 +90,7 @@
                         <div class="b-index-product__line b-index-product__line_4"></div>
                         <div class="b-index-product__text">
                             <h4>Fashion</h4>
-                            <p>{{ content('index.fashion') }}</p>
+                            <p>{{ content('index.fashion')|raw }}</p>
                         </div>
                     </a>
                     <a href="{{ path('projects') }}#all" class="js-index-product b-index-product all">
@@ -100,7 +100,7 @@
                         <div class="b-index-product__line b-index-product__line_4"></div>
                         <div class="b-index-product__text">
                             <h4>Другое</h4>
-                            <p>{{ content('index.other') }}</p>
+                            <p>{{ content('index.other')|raw }}</p>
                         </div>
                     </a>
                 </div>
