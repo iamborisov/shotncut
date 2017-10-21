@@ -25,7 +25,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
-                - sonata.media.provider.image
+                - admin.provider.image
                 - sonata.media.provider.file
                 - sonata.media.provider.vimeo
             formats:
@@ -40,7 +40,7 @@ sonata_media:
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
-                - sonata.media.provider.image
+                - admin.provider.image
                 - sonata.media.provider.file
                 - sonata.media.provider.vimeo
             formats:
@@ -49,7 +49,7 @@ sonata_media:
 
         blog.photo:
             providers:
-                - sonata.media.provider.image
+                - admin.provider.image
             formats:
                 default: { width: 1920 , quality: 60}
 
@@ -68,7 +68,7 @@ sonata_media:
 
         client.logo:
             providers:
-                - sonata.media.provider.image
+                - admin.provider.image
             formats:
                 default: { height: 115 , quality: 90}
 
@@ -78,7 +78,7 @@ sonata_media:
 
         crew.photo:
             providers:
-                - sonata.media.provider.image
+                - admin.provider.image
             formats:
                 default: { width: 180, height: 180 , quality: 70}
 
@@ -88,7 +88,7 @@ sonata_media:
 
         gallery.photo:
             providers:
-                - sonata.media.provider.image
+                - admin.provider.image
             formats:
                 default: { height: 900 , quality: 80}
 
@@ -98,13 +98,13 @@ sonata_media:
 
         project.photo:
             providers:
-                - sonata.media.provider.image
+                - admin.provider.image
             formats:
                 default: { width: 1920 , quality: 60}
 
         project.logo:
             providers:
-                - sonata.media.provider.image
+                - admin.provider.image
             formats:
                 default: { width: 210 , quality: 90}
 
@@ -121,9 +121,31 @@ sonata_media:
             providers:
                 - sonata.media.provider.dailymotion
                 - sonata.media.provider.youtube
-                - sonata.media.provider.image
+                - admin.provider.image
                 - sonata.media.provider.file
                 - sonata.media.provider.vimeo
             formats:
                 default: { width: 1920 , quality: 60}
                 list: { width: 490, height: 342 , quality: 80}
+
+#########################################
+## Image Provider with SVG Support
+#########################################
+
+services:
+    admin.provider.image:
+        class: AppBundle\Provider\ImageProvider
+        tags:
+            - { name: sonata.media.provider }
+        arguments:
+            - "admin.provider.image"
+            - "@sonata.media.filesystem.local"
+            - "@sonata.media.cdn.server"
+            - "@sonata.media.generator.default"
+            - "@sonata.media.thumbnail.format"
+            - ['gif', 'svg', 'jpg', 'jpeg', 'png']
+            - ['image/svg+xml', 'image/gif', 'image/jpeg', 'image/pjpeg', 'image/png']
+            - "@sonata.media.adapter.image.default"
+            - "@sonata.media.metadata.proxy"
+        calls:
+            - [ setTemplates, [{ helper_thumbnail : 'AppBundle:Provider:thumbnail.html.twig', helper_view : 'AppBundle:Provider:view_image.html.twig' }]]
