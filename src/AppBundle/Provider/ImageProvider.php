@@ -4,18 +4,16 @@ namespace AppBundle\Provider;
 
 use Gaufrette\Filesystem;
 use Imagine\Image\ImagineInterface;
-use Sonata\CoreBundle\Model\Metadata;
 use Sonata\MediaBundle\CDN\CDNInterface;
 use Sonata\MediaBundle\Generator\GeneratorInterface;
 use Sonata\MediaBundle\Metadata\MetadataBuilderInterface;
 use Sonata\MediaBundle\Model\MediaInterface;
 use Sonata\MediaBundle\Provider\FileProvider;
 use Sonata\MediaBundle\Provider\MediaProviderInterface;
+use Sonata\MediaBundle\Resizer\ResizerInterface;
 use Sonata\MediaBundle\Thumbnail\ThumbnailInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class ImageProvider extends FileProvider
+class ImageProvider extends \Sonata\MediaBundle\Provider\ImageProvider
 {
     /**
      * @var ImagineInterface
@@ -32,20 +30,46 @@ class ImageProvider extends FileProvider
      * @param array                    $allowedMimeTypes
      * @param ImagineInterface         $adapter
      * @param MetadataBuilderInterface $metadata
+     * @param ResizerInterface         $resizer
      */
-    public function __construct($name, Filesystem $filesystem, CDNInterface $cdn, GeneratorInterface $pathGenerator, ThumbnailInterface $thumbnail, array $allowedExtensions, array $allowedMimeTypes, ImagineInterface $adapter, MetadataBuilderInterface $metadata = null)
-    {
-        parent::__construct($name, $filesystem, $cdn, $pathGenerator, $thumbnail, $allowedExtensions, $allowedMimeTypes, $metadata);
+    public function __construct(
+        $name,
+        Filesystem $filesystem,
+        CDNInterface $cdn,
+        GeneratorInterface $pathGenerator,
+        ThumbnailInterface $thumbnail,
+        array $allowedExtensions,
+        array $allowedMimeTypes,
+        ImagineInterface $adapter,
+        MetadataBuilderInterface $metadata,
+        ResizerInterface $resizer
+    ) {
+        parent::__construct(
+            $name,
+            $filesystem,
+            $cdn,
+            $pathGenerator,
+            $thumbnail,
+            $allowedExtensions,
+            $allowedMimeTypes,
+            $adapter,
+            $metadata
+        );
 
         $this->imagineAdapter = $adapter;
+        $this->resizer = $resizer;
     }
 
     /**
-     * {@inheritdoc}
+     * @param MediaInterface $media
+     * @return bool
      */
-    public function getProviderMetadata()
-    {
-        return new Metadata($this->getName(), $this->getName().'.description', false, 'SonataMediaBundle', array('class' => 'fa fa-picture-o'));
+    protected function isSVG(MediaInterface $media) {
+        if ($media->getContentType() === null) {
+            return $media->getBinaryContent()->getMimeType() === 'image/svg+xml';
+        } else {
+            return $media->getContentType() === 'image/svg+xml';
+        }
     }
 
     /**
@@ -53,7 +77,7 @@ class ImageProvider extends FileProvider
      */
     public function getHelperProperties(MediaInterface $media, $format, $options = array())
     {
-        if ($media->getContentType() === 'image/svg+xml') {
+        if ($this->isSVG($media)) {
             $attributes = array(
                 'alt' => $media->getName(),
                 'title' => $media->getName(),
@@ -73,63 +97,7 @@ class ImageProvider extends FileProvider
             return array_merge($attributes, $options);
         }
 
-        if (MediaProviderInterface::FORMAT_REFERENCE === $format) {
-            $box = $media->getBox();
-        } else {
-            $resizerFormat = $this->getFormat($format);
-            if ($resizerFormat === false) {
-                throw new \RuntimeException(sprintf('The image format "%s" is not defined.
-                        Is the format registered in your ``sonata_media`` configuration?', $format));
-            }
-
-            $box = $this->resizer->getBox($media, $resizerFormat);
-        }
-
-        $mediaWidth = $box->getWidth();
-
-        $params = array(
-            'alt' => $media->getName(),
-            'title' => $media->getName(),
-            'src' => $this->generatePublicUrl($media, $format),
-            'width' => $mediaWidth,
-            'height' => $box->getHeight(),
-        );
-
-        if ($format !== MediaProviderInterface::FORMAT_ADMIN) {
-            $srcSet = array();
-
-            foreach ($this->getFormats() as $providerFormat => $settings) {
-                // Check if format belongs to the current media's context
-                if (strpos($providerFormat, $media->getContext()) === 0) {
-                    $width = $this->resizer->getBox($media, $settings)->getWidth();
-
-                    $srcSet[] = sprintf('%s %dw', $this->generatePublicUrl($media, $providerFormat), $width);
-                }
-            }
-
-            // The reference format is not in the formats list
-            $srcSet[] = sprintf(
-                '%s %dw',
-                $this->generatePublicUrl($media, MediaProviderInterface::FORMAT_REFERENCE),
-                $media->getBox()->getWidth()
-            );
-
-            $params['srcset'] = implode(', ', $srcSet);
-            $params['sizes'] = sprintf('(max-width: %1$dpx) 100vw, %1$dpx', $mediaWidth);
-        }
-
-        return array_merge($params, $options);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getReferenceImage(MediaInterface $media)
-    {
-        return sprintf('%s/%s',
-            $this->generatePath($media),
-            $media->getProviderReference()
-        );
+        return parent::getHelperProperties($media, $format, $options);
     }
 
     /**
@@ -137,7 +105,7 @@ class ImageProvider extends FileProvider
      */
     public function updateMetadata(MediaInterface $media, $force = true)
     {
-        try {
+        if ($this->isSVG($media)) {
             if (!$media->getBinaryContent() instanceof \SplFileInfo) {
                 // this is now optimized at all!!!
                 $path = tempnam(sys_get_temp_dir(), 'sonata_update_metadata');
@@ -147,24 +115,11 @@ class ImageProvider extends FileProvider
                 $fileObject = $media->getBinaryContent();
             }
 
-            if ($media->getContentType() === 'image/svg+xml') {
-                $media->setSize($fileObject->getSize());
-                $media->setWidth(1);
-                $media->setHeight(1);
-            } else {
-                $image = $this->imagineAdapter->open($fileObject->getPathname());
-                $size = $image->getSize();
-
-                $media->setSize($fileObject->getSize());
-                $media->setWidth($size->getWidth());
-                $media->setHeight($size->getHeight());
-            }
-        } catch (\LogicException $e) {
-            $media->setProviderStatus(MediaInterface::STATUS_ERROR);
-
-            $media->setSize(0);
+            $media->setSize($fileObject->getSize());
             $media->setWidth(0);
             $media->setHeight(0);
+        } else {
+            parent::updateMetadata($media, $force);
         }
     }
 
@@ -173,13 +128,14 @@ class ImageProvider extends FileProvider
      */
     public function generatePublicUrl(MediaInterface $media, $format)
     {
-        if (MediaProviderInterface::FORMAT_REFERENCE === $format || $media->getContentType() === 'image/svg+xml') {
-            $path = $this->getReferenceImage($media);
-        } else {
-            $path = $this->thumbnail->generatePublicUrl($this, $media, $format);
+        if ($this->isSVG($media)) {
+            return $this->getCdn()->getPath(
+                $this->getReferenceImage($media),
+                $media->getCdnIsFlushable()
+            );
         }
 
-        return $this->getCdn()->getPath($path, $media->getCdnIsFlushable());
+        return parent::generatePublicUrl($media, $format);
     }
 
     /**
@@ -187,11 +143,11 @@ class ImageProvider extends FileProvider
      */
     public function generatePrivateUrl(MediaInterface $media, $format)
     {
-        if ($media->getContentType() === 'image/svg+xml') {
+        if ($this->isSVG($media)) {
             return $this->getReferenceImage($media);
         }
 
-        return $this->thumbnail->generatePrivateUrl($this, $media, $format);
+        return parent::generatePrivateUrl($media, $format);
     }
 
     /**
@@ -199,44 +155,35 @@ class ImageProvider extends FileProvider
      */
     protected function doTransform(MediaInterface $media)
     {
-        parent::doTransform($media);
-
-        if ($media->getBinaryContent() instanceof UploadedFile) {
-            $fileName = $media->getBinaryContent()->getClientOriginalName();
-        } elseif ($media->getBinaryContent() instanceof File) {
-            $fileName = $media->getBinaryContent()->getFilename();
-        } else {
-            // Should not happen, FileProvider should throw an exception in that case
-            return;
-        }
-
-        if (!in_array(strtolower(pathinfo($fileName, PATHINFO_EXTENSION)), $this->allowedExtensions)
-            || !in_array($media->getBinaryContent()->getMimeType(), $this->allowedMimeTypes)) {
-            return;
-        }
-
-        if ($media->getContentType() === 'image/svg+xml') {
+        if ($this->isSVG($media)) {
+            FileProvider::doTransform($media);
             $media->setWidth(1);
             $media->setHeight(1);
-
             $media->setProviderStatus(MediaInterface::STATUS_OK);
-
-            return;
+        } else {
+            parent::doTransform($media);
         }
-
-        try {
-            $image = $this->imagineAdapter->open($media->getBinaryContent()->getPathname());
-        } catch (\RuntimeException $e) {
-            $media->setProviderStatus(MediaInterface::STATUS_ERROR);
-
-            return;
-        }
-
-        $size = $image->getSize();
-
-        $media->setWidth($size->getWidth());
-        $media->setHeight($size->getHeight());
-
-        $media->setProviderStatus(MediaInterface::STATUS_OK);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateThumbnails(MediaInterface $media)
+    {
+        if (!$this->isSVG($media)) {
+            parent::generateThumbnails($media);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeThumbnails(MediaInterface $media, $formats = null)
+    {
+        if (!$this->isSVG($media)) {
+            parent::removeThumbnails($media, $formats);
+        }
+    }
+
+
 }

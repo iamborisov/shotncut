@@ -3,8 +3,8 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class BlogAdmin extends AbstractAdmin
@@ -30,7 +30,7 @@ class BlogAdmin extends AbstractAdmin
         $formMapper->add('background', 'sonata_type_model_list', [
             'required' => false
         ], [
-            'link_parameters' => ['context' => 'blog.background']
+            'link_parameters' => ['context' => 'default']
         ]);
 
         $formMapper->add('annotation', 'sonata_simple_formatter_type', [
@@ -61,7 +61,7 @@ class BlogAdmin extends AbstractAdmin
         $formMapper->add('video', 'sonata_type_model_list', [
             'required' => false
         ], [
-            'link_parameters' => ['context' => 'blog.video']
+            'link_parameters' => ['context' => 'video']
         ]);
 
         $formMapper->add('description3', 'sonata_simple_formatter_type', [
@@ -87,6 +87,12 @@ class BlogAdmin extends AbstractAdmin
     {
         foreach ($object->getPhotos() as $image) {
             $image->setBlog($object);
+
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->persist($image);
         }
     }
 
@@ -94,6 +100,12 @@ class BlogAdmin extends AbstractAdmin
     {
         foreach ($object->getPhotos() as $image) {
             $image->setBlog($object);
+
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->persist($image);
         }
     }
 }

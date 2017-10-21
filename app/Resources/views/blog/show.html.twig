@@ -6,7 +6,7 @@
 
 {% block background %}
     {% if item.background %}
-        <div class="js-blog-bg b-blog-inner__pic" style="background-image: url({% path item.background, 'default' %})"></div>
+        <div class="js-blog-bg b-blog-inner__pic" style="background-image: url({% path item.background, 'background' %})"></div>
     {% endif %}
 {% endblock %}
 
@@ -27,7 +27,7 @@
                 <div class="js-gallery b-about-gallery">
                     {% for photo in item.photos %}
                     <div class="b-about-gallery__item">
-                        <img src="{% path photo.photo, 'default' %} }}" alt="">
+                        <img src="{% path photo.photo, 'photo' %}" alt="">
                     </div>
                     {% endfor %}
                 </div>

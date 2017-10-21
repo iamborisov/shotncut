@@ -10,15 +10,21 @@ ivory_ck_editor:
             - [Maximize, Source]
 
             filebrowserBrowseRoute: admin_sonata_media_media_ckeditor_browser
-            filebrowserImageBrowseRoute: admin_sonata_media_media_ckeditor_browser
-            # Display images by default when clicking the image dialog browse button
-            filebrowserImageBrowseRouteParameters:
-                provider: sonata.media.provider.image
+            filebrowserBrowseRouteParameters:
+                provider: sonata.media.provider.file
+                context: default
+
             filebrowserUploadRoute: admin_sonata_media_media_ckeditor_upload
             filebrowserUploadRouteParameters:
                 provider: sonata.media.provider.file
-            # Upload file as image when sending a file from the image dialog
+                context: default
+
+            filebrowserImageBrowseRoute: admin_sonata_media_media_ckeditor_browser
+            filebrowserImageBrowseRouteParameters:
+                provider: admin.provider.image
+                context: default
+
             filebrowserImageUploadRoute: admin_sonata_media_media_ckeditor_upload
             filebrowserImageUploadRouteParameters:
-                provider: sonata.media.provider.image
-                context: my-context # Optional, to upload in a custom context
+                provider: admin.provider.image
+                context: default

@@ -3,8 +3,8 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 
 class ProjectPhotoAdmin extends AbstractAdmin
@@ -16,7 +16,7 @@ class ProjectPhotoAdmin extends AbstractAdmin
                 'required' => false
             ), array(
                 'link_parameters' => array(
-                    'context' => 'project.photo'
+                    'context' => 'default'
                 )
             ))
             ->add('position', 'hidden');

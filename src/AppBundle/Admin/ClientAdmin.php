@@ -3,8 +3,8 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -25,7 +25,7 @@ class ClientAdmin extends AbstractAdmin
         ]);
 
         $formMapper->add('logo', 'sonata_type_model_list', [], [
-            'link_parameters' => ['context' => 'client.logo']
+            'link_parameters' => ['context' => 'default']
         ]);
 
     }

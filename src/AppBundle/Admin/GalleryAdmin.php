@@ -3,8 +3,8 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -21,7 +21,7 @@ class GalleryAdmin extends AbstractAdmin
         $formMapper->add('name', 'text');
 
         $formMapper->add('photo', 'sonata_type_model_list', [], [
-            'link_parameters' => ['context' => 'gallery.photo']
+            'link_parameters' => ['context' => 'default']
         ]);
     }
 

@@ -3,8 +3,8 @@
 namespace AppBundle\Admin;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
+use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 
@@ -34,13 +34,13 @@ class ProjectAdmin extends AbstractAdmin
         $formMapper->add('logo', 'sonata_type_model_list', [
             'required' => false,
         ], [
-            'link_parameters' => ['context' => 'project.logo']
+            'link_parameters' => ['context' => 'default']
         ]);
 
         $formMapper->add('background', 'sonata_type_model_list', [
             'required' => false,
         ], [
-            'link_parameters' => ['context' => 'project.background']
+            'link_parameters' => ['context' => 'default']
         ]);
 
         $formMapper->add('annotation', 'sonata_simple_formatter_type', [
@@ -51,7 +51,7 @@ class ProjectAdmin extends AbstractAdmin
         $formMapper->add('video', 'sonata_type_model_list', [
             'required' => false,
         ], [
-            'link_parameters' => ['context' => 'project.video']
+            'link_parameters' => ['context' => 'video']
         ]);
 
         $formMapper->add('description', 'sonata_simple_formatter_type', [
@@ -112,6 +112,12 @@ class ProjectAdmin extends AbstractAdmin
     {
         foreach ($object->getPhotos() as $image) {
             $image->setProject($object);
+
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->persist($image);
         }
     }
 
@@ -119,6 +125,12 @@ class ProjectAdmin extends AbstractAdmin
     {
         foreach ($object->getPhotos() as $image) {
             $image->setProject($object);
+
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->persist($image);
         }
     }
 }

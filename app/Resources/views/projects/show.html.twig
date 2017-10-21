@@ -12,7 +12,7 @@
                 <div class="b-project__top">
                     {% if item.logo %}
                         <div class="js-project-logo b-project__top_logo">
-                            <img src="{% path item.logo, 'default' %}" alt="">
+                            <img src="{% path item.logo, 'project' %}" alt="">
                         </div>
                     {% endif %}
 
@@ -80,7 +80,7 @@
                 <h3>Backstage</h3>
                 <div class="u-clear-fix b-backstage__box">
                     {% for photo in item.photos %}
-                        <div class="js-backstage b-backstage" style="background-image: url('{% path photo.photo, 'default' %}')"></div>
+                        <div class="js-backstage b-backstage" style="background-image: url('{% path photo.photo, 'photo' %}')"></div>
                     {% endfor %}
                 </div>
             </div>
