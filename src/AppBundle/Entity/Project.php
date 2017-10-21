@@ -86,11 +86,6 @@ class Project
     private $time;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
-     */
-    private $type;
-
-    /**
      * @SortablePosition
      * @ORM\Column(name="position", type="integer")
      */
@@ -387,6 +382,9 @@ class Project
         return $this->tags;
     }
 
+    /**
+     * @return string
+     */
     public function getTagsData()
     {
         $result = [];
@@ -420,41 +418,6 @@ class Project
     public function getPosition()
     {
         return $this->position;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return Project
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    public function getTypes()
-    {
-        $result = [];
-
-        foreach (explode(' ', $this->type) as $type) {
-            $result[] = trim($type);
-        }
-
-        return $result;
     }
 
     /**
