@@ -2,27 +2,27 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Project;
+use AppBundle\Entity\ProjectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 
 class ProjectsController extends Controller
 {
     /**
      * @Route("/projects/", name="projects")
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
         $types = $this->getDoctrine()
-            ->getRepository('AppBundle:ProjectType')
+            ->getRepository(ProjectType::class)
             ->findAll();
 
         $projects = $this->getDoctrine()
-            ->getRepository('AppBundle:Project')
-            ->findBy(
-                ['display' => true],
-                ['position' => 'ASC']
-            );
+            ->getRepository(Project::class)
+            ->findAllVisible();
 
         return $this->render('projects/index.html.twig', [
             'projects' => $projects,
@@ -32,14 +32,17 @@ class ProjectsController extends Controller
 
     /**
      * @Route("/projects/{slug}/", name="projects_show")
+     *
+     * @param $slug
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function showAction(Request $request, $slug)
+    public function showAction($slug)
     {
         $item = $this->getDoctrine()
-            ->getRepository('AppBundle:Project')
-            ->findOneBy(['url' => $slug]);
+            ->getRepository(Project::class)
+            ->findByUrl($slug);
 
-        if (is_null($item) || !$item->getDisplay()) {
+        if (!$item) {
             throw new NotFoundHttpException();
         }
 
