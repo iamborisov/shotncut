@@ -45,7 +45,7 @@
                         <div class="b-video__desc b-video__desc_start">
                             <span class="b-video__desc_label">Начало съёмок</span>
                             <div class="b-video__desc_val">
-                                <span>{{ item.created|localizeddate('none', 'none', app.request.locale, "Europe/Moscow", "MMMM Y") }}</span>
+                                <span>{{ item.created|month }} {{ item.created|date('Y') }}</span>
                             </div>
                         </div>
                         {% endif %}

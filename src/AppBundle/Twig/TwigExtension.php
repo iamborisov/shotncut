@@ -3,19 +3,31 @@
 namespace AppBundle\Twig;
 
 use AppBundle\Service\ContentService;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class TwigExtension extends \Twig_Extension
 {
     /** @var ContentService */
     private $content;
 
+    /** @var TranslatorInterface */
+    private $translator;
+
     /**
      * TwigExtension constructor.
      * @param ContentService $content
      */
-    public function __construct(ContentService $content)
+    public function __construct(ContentService $content, TranslatorInterface $translator)
     {
         $this->content = $content;
+        $this->translator = $translator;
+    }
+
+    public function getFilters()
+    {
+        return [
+            new \Twig_SimpleFilter('month', array($this, 'month')),
+        ];
     }
 
     public function getFunctions()
@@ -63,5 +75,9 @@ class TwigExtension extends \Twig_Extension
         );
 
         return $content ? "<meta name='$type' content='$content'>" : '';
+    }
+
+    public function month(\DateTime $date) {
+        return $this->translator->trans('month.'.$date->format('n'));
     }
 }

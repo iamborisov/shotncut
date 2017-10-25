@@ -42,3 +42,18 @@ Job: Должность
 Value: Значение
 MetaDescription: META Description
 MetaKeywords: META Keywords
+
+month:
+    -
+    - Январь
+    - Февраль
+    - Март
+    - Апрель
+    - Май
+    - Июнь
+    - Июль
+    - Август
+    - Сентябрь
+    - Октябрь
+    - Ноябрь
+    - Декабрь
