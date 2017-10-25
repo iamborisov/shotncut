@@ -43,18 +43,18 @@ class ProjectAdmin extends AbstractAdmin
             'ckeditor_context' => 'default'
         ]);
 
-        $formMapper->add('video', 'sonata_type_model_list', [
-            'required' => false,
-        ], [
-            'link_parameters' => ['context' => 'video']
-        ]);
-
         $formMapper->add('gallery', 'sonata_type_collection', [
             'required' => false
         ], [
             'edit' => 'inline',
             'inline' => 'table',
             'sortable'  => 'position',
+        ]);
+
+        $formMapper->add('video', 'sonata_type_model_list', [
+            'required' => false,
+        ], [
+            'link_parameters' => ['context' => 'video']
         ]);
 
         $formMapper->add('description', 'sonata_simple_formatter_type', [
