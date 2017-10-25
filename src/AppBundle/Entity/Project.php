@@ -69,6 +69,14 @@ class Project
     private $photos;
 
     /**
+     * @var AppBundle\Entity\ProjectGallery
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\ProjectGallery", mappedBy="project", cascade={"all"})
+     * @ORM\OrderBy({"position" = "ASC"})
+     */
+    private $gallery;
+
+    /**
      * @var AppBundle\Entity\ProjectType
      *
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\ProjectType", cascade={"persist"})
@@ -107,6 +115,7 @@ class Project
     public function __construct()
     {
         $this->photos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->gallery = new \Doctrine\Common\Collections\ArrayCollection();
         $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -355,6 +364,41 @@ class Project
     public function getPhotos()
     {
         return $this->photos;
+    }
+
+    /**
+     * Add gallery
+     *
+     * @param \AppBundle\Entity\ProjectGallery $gallery
+     *
+     * @return Project
+     */
+    public function addGallery(\AppBundle\Entity\ProjectGallery $gallery)
+    {
+        $gallery->setProject($this);
+        $this->gallery[] = $gallery;
+
+        return $this;
+    }
+
+    /**
+     * Remove gallery
+     *
+     * @param \AppBundle\Entity\ProjectGallery $gallery
+     */
+    public function removeGallery(\AppBundle\Entity\ProjectGallery $gallery)
+    {
+        $this->gallery->removeElement($gallery);
+    }
+
+    /**
+     * Get gallery
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGallery()
+    {
+        return $this->gallery;
     }
 
     /**

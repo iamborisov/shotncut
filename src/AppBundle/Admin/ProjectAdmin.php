@@ -49,6 +49,14 @@ class ProjectAdmin extends AbstractAdmin
             'link_parameters' => ['context' => 'video']
         ]);
 
+        $formMapper->add('gallery', 'sonata_type_collection', [
+            'required' => false
+        ], [
+            'edit' => 'inline',
+            'inline' => 'table',
+            'sortable'  => 'position',
+        ]);
+
         $formMapper->add('description', 'sonata_simple_formatter_type', [
             'required' => false,
             'format' => 'richhtml',
@@ -122,11 +130,31 @@ class ProjectAdmin extends AbstractAdmin
                 ->getManager()
                 ->persist($image);
         }
+
+        foreach ($object->getGallery() as $image) {
+            $image->setProject($object);
+
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->persist($image);
+        }
     }
 
     public function preUpdate($object)
     {
         foreach ($object->getPhotos() as $image) {
+            $image->setProject($object);
+
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->persist($image);
+        }
+
+        foreach ($object->getGallery() as $image) {
             $image->setProject($object);
 
             $this->getConfigurationPool()
@@ -141,6 +169,15 @@ class ProjectAdmin extends AbstractAdmin
     {
         /** @var ProjectPhoto $image */
         foreach ($object->getPhotos() as $image) {
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->remove($image);
+        }
+
+        /** @var ProjectGallery $image */
+        foreach ($object->getGallery() as $image) {
             $this->getConfigurationPool()
                 ->getContainer()
                 ->get('doctrine')

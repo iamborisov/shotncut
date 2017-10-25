@@ -34,6 +34,16 @@
                     </div>
                 </div>
 
+                {% if item.gallery|length %}
+                    <div class="js-gallery b-about-gallery">
+                        {% for photo in item.gallery %}
+                            <div class="b-about-gallery__item">
+                                <img src="{% path photo.photo, 'photo' %}" alt="">
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
                 <div class="js-video b-video">
                     {% if item.video %}
                         {% media item.video, 'default' %}
