@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class BlogController extends Controller
 {
     /**
-     * @Route("/blog/", name="blog")
+     * @Route("/blog", name="blog")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -63,7 +63,7 @@ class BlogController extends Controller
     }
 
     /**
-     * @Route("/blog/{slug}/", name="blog_show")
+     * @Route("/blog/{slug}", name="blog_show")
      *
      * @param string $slug
      * @return \Symfony\Component\HttpFoundation\Response

@@ -25,7 +25,7 @@ class SiteController extends Controller
     }
 
     /**
-     * @Route("/about/", name="about")
+     * @Route("/about", name="about")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */

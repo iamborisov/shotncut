@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ProjectsController extends Controller
 {
     /**
-     * @Route("/projects/", name="projects")
+     * @Route("/gallery", name="projects")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -29,7 +29,7 @@ class ProjectsController extends Controller
     }
 
     /**
-     * @Route("/projects/{slug}/", name="projects_show")
+     * @Route("/gallery/{slug}", name="projects_show")
      *
      * @param $slug
      * @return \Symfony\Component\HttpFoundation\Response

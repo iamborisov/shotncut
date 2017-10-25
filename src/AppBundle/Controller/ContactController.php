@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class ContactController extends Controller
 {
     /**
-     * @Route("/contact/", name="contact")
+     * @Route("/contacts", name="contact")
      *
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -22,7 +22,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/contact/send", name="contact_send")
+     * @Route("/contacts/send", name="contact_send")
      *
      * @param Request $request
      * @return JsonResponse
@@ -46,7 +46,7 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/contact/calc", name="contact_calc")
+     * @Route("/contacts/calc", name="contact_calc")
      *
      * @param Request $request
      * @return JsonResponse
