@@ -830,6 +830,10 @@ input[type=number]::-webkit-outer-spin-button {
         padding-right: 0; }
     .b-text.b-text_x2 blockquote {
       margin-left: 0; }
+  .b-text strong {
+    font-weight: bold; }
+  .b-text em {
+    font-style: italic; }
   .b-text blockquote {
     padding-bottom: 3px;
     position: relative;
@@ -850,6 +854,7 @@ input[type=number]::-webkit-outer-spin-button {
       line-height: 25px;
       font-family: "Open Sans", sans-serif;
       font-style: italic;
+      font-weight: normal;
       opacity: .5; }
 
 .b-about-gallery__section {
