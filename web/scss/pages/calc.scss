@@ -1,0 +1,780 @@
+.b-popup__overlay{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(18,18,18, .9);
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .25s, opacity .25s;
+
+  &.open{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity .25s;
+
+    .b-popup{
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+.b-popup__close{
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: #fff;
+  top: 50px;
+  right: 25px;
+  z-index: 5;
+
+  &:before{
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin: -8px 0 0 -8px;
+    background: url("../i/calc/i-popup-close.png") no-repeat;
+    background-size: cover;
+    transition: transform .15s;
+  }
+
+  &:hover{
+    &:before{
+      transform: scale(1.5);
+    }
+  }
+}
+
+.b-popup{
+  position: relative;
+  margin: 50px 110px;
+  background: #000;
+  z-index: 2;
+  box-shadow: 0 0 105px rgba(0,0,0, 71);
+  overflow: scroll;
+  opacity: 0;
+  transform: scale(0);
+  transition: transform .45s .15s, opacity .45s .15s;
+}
+
+.b-popup__first{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  text-align: center;
+  font-size: 20px;
+  line-height: 31px;
+  padding: 115px 30px;
+  width: 100%;
+
+  &:before{
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-bottom: 90px;
+    margin-left: -50px;
+    width: 101px;
+    height: 40px;
+    background: url(../i/logo.svg) no-repeat;
+    background-size: cover;
+  }
+
+  h2{
+    font-size: 61px;
+    line-height: 70px;
+    margin-bottom: 0;
+  }
+
+  .b-button__box{
+    margin-top: 27px;
+
+    .b-button{
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 7px;
+      min-width: 240px;
+    }
+  }
+}
+
+.b-calc__box{
+  position: relative;
+  min-height: 100%;
+  display: table;
+  width: 100%;
+}
+
+.b-calc__sidebar{
+  display: table-cell;
+  vertical-align: top;
+  width: 35%;
+  box-sizing: border-box;
+  min-height: 100%;
+  padding: 55px 45px;
+  border-right: $borderWhite;
+
+  .b-calc__sidebar-price{
+    position: relative;
+    margin-bottom: 65px;
+  }
+
+  .b-calc__sidebar-price_price{
+    font-size: 40px;
+    line-height: 50px;
+    margin-bottom: 5px;
+  }
+
+  .b-calc__sidebar-price_label{
+    opacity: .3;
+    font-size: 12px;
+  }
+}
+
+.b-calc__nav_box{
+  position: relative;
+  border-left: $borderWhite;
+
+  &:before,
+  &:after{
+    content: "";
+    position: absolute;
+    left: -1px;
+    width: 2px;
+  }
+  &:before{
+    height: 25px;
+    bottom: 100%;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0+0,0.1+100 */
+    background: -moz-linear-gradient(top, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0) 0%,rgba(255,255,255,0.1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%,rgba(255,255,255,0.1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#1affffff',GradientType=0 ); /* IE6-9 */
+  }
+  &:after{
+    height: 50px;
+    top: 100%;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&0.1+0,0+100 */
+    background: -moz-linear-gradient(top, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1affffff', endColorstr='#00ffffff',GradientType=0 ); /* IE6-9 */
+  }
+}
+
+.b-calc__sidebar_scheme{
+  margin-left: 24px;
+}
+
+.b-calc__nav{
+  position: relative;
+  margin-bottom: 55px;
+
+  li{
+    padding: 16px 0;
+
+    &:first-child{
+      padding-top: 12px;
+    }
+  }
+
+  .b-calc__nav_link{
+    padding: 4px 0 4px 24px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    color: rgba(255,255,255, .3);
+
+    &.b-calc__nav_link-1:before{
+      background: url("../i/calc/i-step-1.png") no-repeat;
+    }
+    &.b-calc__nav_link-2:before{
+      background: url("../i/calc/i-step-2.png") no-repeat;
+    }
+    &.b-calc__nav_link-3:before{
+      width: 24px;
+      height: 13px;
+      margin-right: -12px;
+      background: url("../i/calc/i-step-3.png") no-repeat;
+    }
+    &.b-calc__nav_link-4:before{
+      width: 21px;
+      height: 21px;
+      background: url("../i/calc/i-step-4.png") no-repeat;
+    }
+    &.b-calc__nav_link-5:before{
+      width: 18px;
+      height: 18px;
+      background: url("../i/calc/i-step-5.png") no-repeat;
+    }
+
+    &:before{
+      content: "";
+      position: absolute;
+      top: 50%;
+      transform: translate(0,-50%);
+      right: 100%;
+      z-index: 2;
+      opacity: .3;
+      transition: opacity .25s;
+      width: 20px;
+      margin-right: -10px;
+      height: 20px;
+      background-size: cover !important;
+    }
+
+    &:after{
+      content: "";
+      position: absolute;
+      left: -1px;
+      width: 2px;
+      top: 0;
+      bottom: 0;
+      background: #000;
+      z-index: 1;
+    }
+
+    &:hover{
+      color: rgba(255,255,255, .5);
+
+      &:before{
+        opacity: .5;
+      }
+    }
+
+    &.active{
+      color: #fff;
+      cursor: default;
+
+      &:before{
+        opacity: 1;
+      }
+    }
+
+    &.disabled{
+      cursor: default;
+      color: rgba(255,255,255, .2) !important;
+      color: #fff;
+
+      &:before{
+        opacity: .2 !important;
+      }
+    }
+  }
+}
+
+
+.b-calc{
+  display: table-cell;
+  vertical-align: middle;
+  width: 65%;
+  position: relative;
+}
+
+.b-calc__wrapper{
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  padding: 55px 15%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.b-calc_steps{
+  font-size: 20px;
+  line-height: 30px;
+  color: #2b2b2b;
+  margin-bottom: 8px;
+
+  span{
+    color: #fff;
+  }
+}
+.b-calc__item{
+  position: relative;
+  transform: translate(200%, 0);
+  opacity: 0;
+  transition: opacity .25s, transform .25s;
+
+  &.current{
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  &.passed{
+    transform: translate(-200%, 0);
+    opacity: 0;
+  }
+}
+.b-calc__item_inside{
+  margin-left: 30px;
+  position: relative;
+}
+.b-calc__item_box{
+
+  &.b-calc__item_box-last{
+    .b-button__box{
+      margin-top: 90px;
+      margin-bottom: 30px;
+
+      .b-button{
+        padding-left: 45px;
+        padding-right: 45px;
+      }
+    }
+  }
+
+  h2{
+    margin-bottom: 70px;
+    font-size: 42px;
+    line-height: 50px;
+
+    &.b-calc__item_title{
+      font-size: 25px;
+      line-height: 32px;
+      margin-bottom: 50px;
+    }
+
+    + p{
+      margin-top: -50px;
+      margin-bottom: 50px;
+    }
+  }
+
+  .b-input{
+    text-align: center;
+    background: none !important;
+    border-radius: 0;
+    border-bottom: 1px solid #fff;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.b-calc__arrows{
+  position: relative;
+  margin-top: 100px;
+  font-size: 0;
+  line-height: 0;
+
+  a{
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    width: 70px;
+    height: 60px;
+    box-sizing: border-box;
+    margin: 0 10px;
+
+    &:before{
+      content: "";
+      position: absolute;
+      width: 40px;
+      left: 50%;
+      margin-left: -20px;
+      top: 0;
+      bottom: 0;
+    }
+
+    &.visibility{
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    &.b-calc__arrows_l{
+      border: 1px solid rgba(255,255,255, .3);
+      transition: border-color .25s;
+
+      &:before{
+        background: url("../i/arrow.svg") no-repeat center;
+        background-size: 100% auto;
+        transform: rotate(180deg);
+        opacity: .3;
+        transition: opacity .25s;
+      }
+
+      &:hover{
+        border-color: #fff;
+
+        &:before{
+          opacity: 1;
+        }
+      }
+    }
+    &.b-calc__arrows_r{
+      background: #fff;
+      transition: background .25s;
+
+      &:before{
+        background: url("../i/arrow-black.svg") no-repeat center;
+        background-size: 100% auto;
+      }
+
+      &:hover{
+        background: rgba(255,255,255, .5);
+      }
+
+      &.disabled{
+        opacity: .5;
+        background: #fff;
+      }
+    }
+  }
+}
+.b-calc-other{
+  margin-left: 30px;
+  margin-bottom: -50px;
+  margin-top: -20px;
+
+  &+.b-checkbox{
+    margin-top: 100px;
+  }
+
+  &.visibility{
+    visibility: hidden;
+    opacity: 0;
+
+    &+.b-checkbox{
+      margin-top: 0;
+    }
+  }
+
+  &.b-calc-other_hide{
+    &.visibility{
+      display: none;
+    }
+  }
+
+  .b-input{
+    text-align: left;
+  }
+}
+
+.b-slider__box{
+  position: relative;
+
+  .ui-widget.ui-widget-content{
+    border: none;
+    background: rgba(255,255,255, .3);
+    height: 4px;
+    border-radius: 2px;
+  }
+
+  .ui-widget-header{
+    background: #fff;
+  }
+
+  .ui-slider-handle{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #fff;
+    border: none;
+    box-shadow: 0 0 15px rgba(0,0,0, .8);
+    margin-left: -10px;
+    top: -10px;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .b-slider__text{
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 15px;
+    display: block;
+  }
+}
+
+.b-calc-success{
+  position: relative;
+  display: table;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  font-size: 20px;
+  line-height: 31px;
+
+  .b-calc-success__wrapper{
+    display: table-cell;
+    vertical-align: middle;
+    height: 100%;
+    padding: 50px;
+    text-align: center;
+  }
+
+  h2{
+    font-size: 61px;
+    line-height: 70px;
+    margin-bottom: 15px;
+    font-family: $fontOpenSans;
+  }
+
+  p{
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .b-button__box{
+    margin-top: 45px;
+  }
+}
+
+.b-scheme__box{
+
+  .b-scheme__overlay{
+    overflow: scroll;
+  }
+
+  .b-scheme{
+    width: 1323px;
+    height: 1004px;
+    position: relative;
+    background: url("../i/scheme.svg") no-repeat -71px 0;
+  }
+
+  .b-button__box{
+    margin: 30px;
+  }
+
+  .b-scheme__point{
+    position: absolute;
+    border: 1px solid transparent;
+    transition: border-color .25s;
+    width: 161px;
+    height: 46px;
+
+    &.open,
+    &:hover{
+      border-color: #fff;
+      z-index: 3;
+      background: none;
+
+      .b-scheme__text{
+        visibility: visible;
+        opacity: 1;
+        transition: opacity .25s, visibility 0s;
+      }
+    }
+
+    &.b-scheme__point_2{
+      width: 224px;
+      height: 55px;
+    }
+
+    &.main{
+      width: 146px;
+      height: 71px;
+      border: none;
+    }
+
+    &.b-scheme__point_bottom{
+      .b-scheme__text{
+        bottom: auto;
+        top: 100%;
+        padding-bottom: 0;
+        padding-top: 18px;
+
+        span:before{
+          top: auto;
+          bottom: 100%;
+          transform: rotate(180deg);
+          margin-bottom: -1px;
+        }
+      }
+    }
+
+    .b-scheme__text{
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -85px;
+      width: 170px;
+      padding-bottom: 18px;
+      color: #000;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity .25s, visibility 0s .25s ;
+
+      span{
+        display: block;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        background: #fff;
+        border-radius: 5px;
+        font-size: 13px;
+        line-height: 22px;
+        position: relative;
+
+        &:before{
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -8px;
+          width: 0;
+          height: 0;
+          border-top: 6px solid #fff;
+          border-left: 8px solid transparent;
+          border-right: 8px solid transparent;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1024px){
+
+  .b-popup{
+    margin: 0;
+  }
+
+}
+
+@media only screen and (max-width: 767px){
+
+  .b-popup__close{
+    width: 50px;
+    height: 50px;
+    top: 15px;
+    right: auto;
+    left: 4%;
+  }
+
+  .b-popup__first{
+    font-size: 13px;
+    line-height: 24px;
+    padding: 60% 9% 0;
+    height: 100%;
+
+    &:before{
+      display: none;
+    }
+
+    h2{
+      font-size: 30px;
+      line-height: 35px;
+    }
+
+    .b-button__box{
+      position: absolute;
+      bottom: 10px;
+      left: 9%;
+      right: 9%;
+
+      .b-button{
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
+  }
+
+  .b-scheme__box{
+    .b-button__box{
+      margin: 15px 4%;
+      text-align: right;
+    }
+  }
+
+  .b-calc__sidebar{
+    display: block;
+    width: 100%;
+    padding: 15px 4% 0 70px;
+    text-align: right;
+    position: relative;
+    border-right: none;
+    margin-bottom: 30px;
+
+    .b-calc__sidebar-price{
+      margin-bottom: 0;
+    }
+
+    .b-calc__sidebar-price_price{
+      font-size: 25px;
+      line-height: 30px;
+      margin-bottom: 0;
+    }
+    .b-calc__sidebar-price_label{
+      font-size: 10px;
+      line-height: 15px;
+    }
+  }
+
+  .b-calc__nav_box{
+    display: none;
+  }
+  .b-calc{
+    width: 100%;
+    display: block;
+    vertical-align: top;
+  }
+  .b-calc__box{
+    display: block;
+    padding-bottom: 25px;
+  }
+
+  .b-calc__wrapper{
+    padding: 0 9%;
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .b-calc__item_box h2{
+    font-size: 25px;
+    line-height: 35px;
+    margin-bottom: 30px;
+
+    + p{
+      margin-top: -30px;
+      margin-bottom: 30px;
+    }
+  }
+
+  .b-calc__arrows{
+    margin-top: 80px;
+    zoom: .8;
+  }
+
+  .b-slider__box .b-slider__text{
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .b-calc__item_box.b-calc__item_box-last .b-button__box .b-button{
+    width: 100%
+  }
+
+  .b-calc-success{
+    min-height: 0;
+    font-size: 13px;
+    line-height: 24px;
+
+    .b-button__box{
+      .b-button{
+        width: 100%;
+      }
+    }
+
+    .b-calc-success__wrapper{
+      padding: 70px 9%;
+    }
+
+    h2{
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) and (orientation: landscape){
+  .b-popup__first{
+    padding-top: 60px;
+  }
+}

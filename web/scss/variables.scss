@@ -1,0 +1,29 @@
+$fontOpenSans: 'Open Sans', sans-serif;;
+$rouble: 'als_rublregular';
+$fontCormorant: 'Cormorant Garamond', serif;
+
+$regularFontSize: 16px;
+$regularFontLineHeight: 25px;
+
+$biggerFontSize: 20px;
+$biggerLH: 31px;
+
+$bgColor: #000;
+$regularColor: #fff;
+
+$border: 1px solid rgba(0,0,0,.1);
+$borderWhite: 1px solid rgba(255,255,255,.1);
+
+$buttonHeight: 56px;
+
+
+
+// placeholder
+@mixin placeholder ($color, $selector)
+{
+  $selector: unquote($selector);
+  #{$selector}::-webkit-input-placeholder{color: $color;}
+  #{$selector}:-moz-placeholder{color: $color;}
+  #{$selector}::-moz-placeholder{color: $color;}
+  #{$selector}:-ms-input-placeholder{color: $color;}
+}

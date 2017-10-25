@@ -418,7 +418,7 @@ $(function () {
     range: "min",
     value: DEF_DAYS,
     min: 1,
-    max: 365,
+    max: 30,
     step: 1,
     slide: function( event, ui ) {
       getDaysVals(ui.value);

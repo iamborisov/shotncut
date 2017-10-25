@@ -75,16 +75,20 @@
             </div>
         </section>
 
+        {% if item.photos|length %}
         <section class="b-backstage__section">
             <div class="b-wrapper">
                 <h3>Backstage</h3>
-                <div class="u-clear-fix b-backstage__box">
+                <div class="js-gallery b-about-gallery">
                     {% for photo in item.photos %}
-                        <div class="js-backstage b-backstage" style="background-image: url('{% path photo.photo, 'photo' %}')"></div>
+                        <div class="b-about-gallery__item">
+                            <img src="{% path photo.photo, 'photo' %}" alt="">
+                        </div>
                     {% endfor %}
                 </div>
             </div>
         </section>
+        {% endif %}
 
     </div>
 {% endblock %}
