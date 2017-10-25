@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\ProjectPhoto;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -133,6 +134,18 @@ class ProjectAdmin extends AbstractAdmin
                 ->get('doctrine')
                 ->getManager()
                 ->persist($image);
+        }
+    }
+
+    public function preRemove($object)
+    {
+        /** @var ProjectPhoto $image */
+        foreach ($object->getPhotos() as $image) {
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->remove($image);
         }
     }
 }

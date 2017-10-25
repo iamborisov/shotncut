@@ -2,6 +2,7 @@
 
 namespace AppBundle\Admin;
 
+use AppBundle\Entity\BlogPhoto;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -114,6 +115,18 @@ class BlogAdmin extends AbstractAdmin
                 ->get('doctrine')
                 ->getManager()
                 ->persist($image);
+        }
+    }
+
+    public function preRemove($object)
+    {
+        /** @var BlogPhoto $image */
+        foreach ($object->getPhotos() as $image) {
+            $this->getConfigurationPool()
+                ->getContainer()
+                ->get('doctrine')
+                ->getManager()
+                ->remove($image);
         }
     }
 }
