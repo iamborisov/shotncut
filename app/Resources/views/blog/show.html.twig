@@ -28,7 +28,7 @@
                     </div>
                 </div>
 
-                {% if item.photos|length %}
+                {% if item.photos.count %}
                 <div class="js-gallery b-about-gallery">
                     {% for photo in item.photos %}
                     <div class="b-about-gallery__item">

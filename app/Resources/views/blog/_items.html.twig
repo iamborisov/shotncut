@@ -5,7 +5,7 @@
         <div class="js-blog-pic b-blog__pic">
             {% if item.background %}
                 <div class="b-blog__pic_img" style="background-image: url({% path item.background, 'list' %})"></div>
-            {% elseif item.photos|length %}
+            {% elseif item.photos.count %}
                 <div class="b-blog__pic_img" style="background-image: url({% path item.photos.get(0).photo, 'list' %})"></div>
             {% else %}
                 <div class="b-blog__pic_img" style="background-color: #444;"></div>

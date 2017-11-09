@@ -34,7 +34,7 @@
                     </div>
                 </div>
 
-                {% if item.gallery|length %}
+                {% if item.gallery.count %}
                     <div class="js-gallery b-about-gallery">
                         {% for photo in item.gallery %}
                             <div class="b-about-gallery__item">
@@ -85,7 +85,7 @@
             </div>
         </section>
 
-        {% if item.photos|length %}
+        {% if item.photos.count %}
         <section class="b-backstage__section">
             <div class="b-wrapper">
                 <h3>Backstage</h3>
