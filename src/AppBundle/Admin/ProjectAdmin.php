@@ -128,6 +128,10 @@ class ProjectAdmin extends AbstractAdmin
     public function prePersist($object)
     {
         foreach ($object->getPhotos() as $image) {
+            if ($image->getPhoto() == null) {
+                continue;
+            }
+
             $image->setProject($object);
 
             $this->getConfigurationPool()
@@ -138,6 +142,10 @@ class ProjectAdmin extends AbstractAdmin
         }
 
         foreach ($object->getGallery() as $image) {
+            if ($image->getPhoto() == null) {
+                continue;
+            }
+
             $image->setProject($object);
 
             $this->getConfigurationPool()
@@ -150,24 +158,33 @@ class ProjectAdmin extends AbstractAdmin
 
     public function preUpdate($object)
     {
-        foreach ($object->getPhotos() as $image) {
-            $image->setProject($object);
+        $manager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager()
-                ->persist($image);
+        foreach ($object->getPhotos() as $i => $image) {
+            if ($image->getPhoto()) {
+                $image->setProject($object);
+
+                $manager->persist($image);
+            } else {
+                $object->getPhotos()->remove($i);
+
+                $manager->remove($image);
+            }
         }
 
-        foreach ($object->getGallery() as $image) {
-            $image->setProject($object);
+        foreach ($object->getGallery() as $i => $image) {
+            if ($image->getPhoto()) {
+                $image->setProject($object);
 
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager()
-                ->persist($image);
+                $manager->persist($image);
+            } else {
+                $object->getGallery()->remove($i);
+
+                $manager->remove($image);
+            }
         }
     }
 

@@ -95,6 +95,10 @@ class BlogAdmin extends AbstractAdmin
     public function prePersist($object)
     {
         foreach ($object->getPhotos() as $image) {
+            if ($image->getPhoto() == null) {
+                continue;
+            }
+
             $image->setBlog($object);
 
             $this->getConfigurationPool()
@@ -107,14 +111,21 @@ class BlogAdmin extends AbstractAdmin
 
     public function preUpdate($object)
     {
-        foreach ($object->getPhotos() as $image) {
-            $image->setBlog($object);
+        $manager = $this->getConfigurationPool()
+            ->getContainer()
+            ->get('doctrine')
+            ->getManager();
 
-            $this->getConfigurationPool()
-                ->getContainer()
-                ->get('doctrine')
-                ->getManager()
-                ->persist($image);
+        foreach ($object->getPhotos() as $i => $image) {
+            if ($image->getPhoto()) {
+                $image->setBlog($object);
+
+                $manager->persist($image);
+            } else {
+                $object->getPhotos()->remove($i);
+
+                $manager->remove($image);
+            }
         }
     }
 
