@@ -856,6 +856,23 @@ input[type=number]::-webkit-outer-spin-button {
       font-style: italic;
       font-weight: normal;
       opacity: .5; }
+  .b-text ul {
+    margin-bottom: 35px; }
+    .b-text ul li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 15px; }
+      .b-text ul li:before {
+        content: "";
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #fff;
+        top: 10px;
+        left: 0; }
+      .b-text ul li:last-child {
+        margin-bottom: 0; }
 
 .b-about-gallery__section {
   position: relative;
