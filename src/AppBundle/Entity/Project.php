@@ -117,6 +117,11 @@ class Project
     private $metaKeywords;
 
     /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $metaTitle;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -558,5 +563,21 @@ class Project
     public function setMetaKeywords($metaKeywords)
     {
         $this->metaKeywords = $metaKeywords;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetaTitle()
+    {
+        return $this->metaTitle;
+    }
+
+    /**
+     * @param string $metaTitle
+     */
+    public function setMetaTitle($metaTitle)
+    {
+        $this->metaTitle = $metaTitle;
     }
 }

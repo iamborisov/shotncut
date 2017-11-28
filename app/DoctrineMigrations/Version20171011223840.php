@@ -54,14 +54,23 @@ class Version20171011223840 extends AbstractMigration
 
         $this->addSetting('blog.title', 'Заголовок');
 
+        $this->addSetting('seo.index.title', 'Главная: Title', '');
         $this->addSetting('seo.index.keywords', 'Главная: Meta-Keywords', 'видео на заказ');
         $this->addSetting('seo.index.description', 'Главная: Meta-Description', 'Ищете, где заказать видеоролик в Крыму, Москве, Санкт-Петербурге? Shot’nCut - это видео на заказ, видеосъемка вирусного, корпоративного, рекламного видео, производство видео для бизнеса');
+
+        $this->addSetting('seo.blog.title', 'Блоги: Title', '');
         $this->addSetting('seo.blog.keywords', 'Блоги: Meta-Keywords', 'видео на заказ');
         $this->addSetting('seo.blog.description', 'Блоги: Meta-Description', 'Ищете, где заказать видеоролик в Крыму, Москве, Санкт-Петербурге? Shot’nCut - это видео на заказ, видеосъемка вирусного, корпоративного, рекламного видео, производство видео для бизнеса');
+
+        $this->addSetting('seo.project.title', 'Проекты: Title', '');
         $this->addSetting('seo.project.keywords', 'Проекты: Meta-Keywords', 'видео на заказ');
         $this->addSetting('seo.project.description', 'Проекты: Meta-Description', 'Ищете, где заказать видеоролик в Крыму, Москве, Санкт-Петербурге? Shot’nCut - это видео на заказ, видеосъемка вирусного, корпоративного, рекламного видео, производство видео для бизнеса');
+
+        $this->addSetting('seo.contact.title', 'Контакты: Title', '');
         $this->addSetting('seo.contact.keywords', 'Контакты: Meta-Keywords', 'видео на заказ');
         $this->addSetting('seo.contact.description', 'Контакты: Meta-Description', 'Ищете, где заказать видеоролик в Крыму, Москве, Санкт-Петербурге? Shot’nCut - это видео на заказ, видеосъемка вирусного, корпоративного, рекламного видео, производство видео для бизнеса');
+
+        $this->addSetting('seo.about.title', 'О нас: Title', '');
         $this->addSetting('seo.about.keywords', 'О нас: Meta-Keywords', 'видео на заказ');
         $this->addSetting('seo.about.description', 'О нас: Meta-Description', 'Ищете, где заказать видеоролик в Крыму, Москве, Санкт-Петербурге? Shot’nCut - это видео на заказ, видеосъемка вирусного, корпоративного, рекламного видео, производство видео для бизнеса');
     }

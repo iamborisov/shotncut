@@ -29,6 +29,10 @@
     </a>
 {% endblock %}
 
+{% block title %}
+    {{ content('seo.index.title', parent()) }}
+{% endblock %}
+
 {% block body %}
     <div class="js-content b-content">
         <div class="js-index-marker"></div>

@@ -71,6 +71,10 @@ class BlogAdmin extends AbstractAdmin
             'ckeditor_context' => 'default'
         ]);
 
+        $formMapper->add('metaTitle', 'text', [
+            'required' => false,
+        ]);
+
         $formMapper->add('metaDescription', 'text', [
             'required' => false,
         ]);

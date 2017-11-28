@@ -1,12 +1,16 @@
 {% extends 'layout.html.twig' %}
 
 {% block meta %}
-    {{ seo('description', 'project') }}
-    {{ seo('keywords', 'project') }}
+    {{ seo('description', 'blog') }}
+    {{ seo('keywords', 'blog') }}
 {% endblock %}
 
 {% block javascripts %}
     <script src="/js/pages/blog-list.js"></script>
+{% endblock %}
+
+{% block title %}
+    {{ content('seo.blog.title', parent()) }}
 {% endblock %}
 
 {% block body %}

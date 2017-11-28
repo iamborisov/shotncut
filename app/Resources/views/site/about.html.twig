@@ -17,6 +17,10 @@
     </div>
 {% endblock %}
 
+{% block title %}
+    {{ content('seo.about.title', parent()) }}
+{% endblock %}
+
 {% block body %}
     <div class="js-content b-content">
         <section class="js-index-title js-window-height b-index-title">

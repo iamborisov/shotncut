@@ -15,6 +15,14 @@
     {% endif %}
 {% endblock %}
 
+{% block title %}
+    {% if item.metaTitle %}
+        {{ item.metaTitle }}
+    {% else %}
+        {{ parent() }} - {{ item.title }}
+    {% endif %}
+{% endblock %}
+
 {% block body %}
     <div class="js-content b-content">
 

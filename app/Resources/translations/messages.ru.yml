@@ -41,8 +41,9 @@ Background: Фон
 Url: Ссылка
 Job: Должность
 Value: Значение
-MetaDescription: META Description
-MetaKeywords: META Keywords
+MetaDescription: SEO Description
+MetaKeywords: SEO Keywords
+MetaTitle: SEO Title
 
 month:
     -

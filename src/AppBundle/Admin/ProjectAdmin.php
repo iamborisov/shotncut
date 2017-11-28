@@ -91,6 +91,10 @@ class ProjectAdmin extends AbstractAdmin
             'required' => false,
         ]);
 
+        $formMapper->add('metaTitle', 'text', [
+            'required' => false,
+        ]);
+
         $formMapper->add('metaDescription', 'text', [
             'required' => false,
         ]);
