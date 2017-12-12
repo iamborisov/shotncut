@@ -36,7 +36,7 @@ services:
             subject: "Запрос на бриф"
             recipient: "contacts.email.calc"
             sender: "contacts.email.from"
-            template: "email/calc.txt.twig"
+            template: "email/brief.txt.twig"
             contentType: "text/plain"
             required:
                 - date
@@ -65,7 +65,7 @@ services:
                 stylist: ""
                 storyboard: ""
                 days: ""
-                equipment[]: []
+                equipment: []
                 equipment_other: ""
                 team: ""
                 montage: ""
