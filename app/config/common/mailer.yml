@@ -34,7 +34,7 @@ services:
         class: AppBundle\Service\MailerService
         properties:
             subject: "Запрос на бриф"
-            recipient: "contacts.email.calc"
+            recipient: "contacts.email.brief"
             sender: "contacts.email.from"
             template: "email/brief.txt.twig"
             contentType: "text/plain"
