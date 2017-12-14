@@ -145,9 +145,14 @@ class MailerService {
             return false;
         }
 
-        return $this->mailer->send(
-            $this->create($recipient, $data)
-        );
+        // anti-spam
+        if (isset($_POST['tsp']) && empty($_POST['tsp'])) {
+            return $this->mailer->send(
+                $this->create($recipient, $data)
+            );
+        } else {
+            return 1;
+        }
     }
 
     /**
