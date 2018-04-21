@@ -1,0 +1,4 @@
+gregwar_captcha:
+    as_url: true
+    background_color: [0,0,0]
+    length: 6

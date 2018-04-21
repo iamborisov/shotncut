@@ -18,3 +18,6 @@ gallery:
 media:
     resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
     prefix: /media
+
+gregwar_captcha_routing:
+    resource: "@GregwarCaptchaBundle/Resources/config/routing/routing.yml"

@@ -54,6 +54,10 @@
                             </div>
                             <textarea id="contact_text" name="contact[text]" class="js-required b-input" placeholder="Ваше сообщение"></textarea>
                             <input type="text" name="tsp" class="hidden" />
+                            <div class="u-clear-fix b-contact-form__column">
+                                <img src="/contacts/captcha?" onclick="javascript:this.src+=Math.round(Math.random()*10);">
+                                <input type="text" name="captcha" class="js-required b-input">
+                            </div>
                             <div class="b-button__box">
                                 <button type="submit" class="b-button" disabled>Отправить</button>
                             </div>
