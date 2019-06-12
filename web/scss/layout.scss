@@ -245,7 +245,7 @@ h6{
     top: -2px;
     left: 50%;
     margin-left: -50px;
-    width: 10px;
+    width: 100px;
     height: 60px;
     background: url("../i/new-logo.svg") no-repeat;
     background-size: 100% auto;
@@ -522,14 +522,14 @@ h6{
   float: left;
   vertical-align: top;
   margin-right: 75px;
-  padding-top: 20px;
+  padding-top: 10px;
 
   a{
     display: block;
-    width: 101px;
-    height: 40px;
-    background: url("../i/logo.svg") no-repeat;
-    background-size: cover;
+    width: 100px;
+    height: 60px;
+    background: url("../i/new-logo.svg") no-repeat;
+    background-size: 100% auto;
     transition: opacity .25s;
 
     &:hover{
@@ -542,6 +542,7 @@ h6{
   float: left;
   vertical-align: top;
   padding-top: 13px;
+  max-width: 55%;
 
   a{
     font-weight: bold;
@@ -1415,7 +1416,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding-bottom: 35px;
     font-size: 20px;
     line-height: 31px;
-    margin-top: 180px;
+    margin-top: 115px;
 
     .b-button__box{
       position: absolute;
@@ -1429,6 +1430,7 @@ input[type=number]::-webkit-outer-spin-button {
     .b-social{
       display: block;
       margin-top: 35px;
+      width: 100%;
     }
   }
 
@@ -1447,6 +1449,7 @@ input[type=number]::-webkit-outer-spin-button {
   .b-footer__contact{
     display: inline-block;
     float: none;
+    max-width: none;
   }
 
   .b-scroll-top{

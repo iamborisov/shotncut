@@ -468,7 +468,7 @@ h6 {
     top: -2px;
     left: 50%;
     margin-left: -50px;
-    width: 10px;
+    width: 100px;
     height: 60px;
     background: url("../i/new-logo.svg") no-repeat;
     background-size: 100% auto;
@@ -689,13 +689,13 @@ h6 {
   float: left;
   vertical-align: top;
   margin-right: 75px;
-  padding-top: 20px; }
+  padding-top: 10px; }
   .b-footer__logo a {
     display: block;
-    width: 101px;
-    height: 40px;
-    background: url("../i/logo.svg") no-repeat;
-    background-size: cover;
+    width: 100px;
+    height: 60px;
+    background: url("../i/new-logo.svg") no-repeat;
+    background-size: 100% auto;
     transition: opacity .25s; }
     .b-footer__logo a:hover {
       opacity: .8; }
@@ -703,7 +703,8 @@ h6 {
 .b-footer__contact {
   float: left;
   vertical-align: top;
-  padding-top: 13px; }
+  padding-top: 13px;
+  max-width: 55%; }
   .b-footer__contact a {
     font-weight: bold;
     margin-right: 20px;
@@ -1354,7 +1355,7 @@ input[type=number]::-webkit-outer-spin-button {
     padding-bottom: 35px;
     font-size: 20px;
     line-height: 31px;
-    margin-top: 180px; }
+    margin-top: 115px; }
     .b-footer .b-button__box {
       position: absolute;
       bottom: 100%;
@@ -1364,7 +1365,8 @@ input[type=number]::-webkit-outer-spin-button {
       margin-bottom: 100px; }
     .b-footer .b-social {
       display: block;
-      margin-top: 35px; }
+      margin-top: 35px;
+      width: 100%; }
 
   .b-footer__logo {
     float: none;
@@ -1377,7 +1379,8 @@ input[type=number]::-webkit-outer-spin-button {
 
   .b-footer__contact {
     display: inline-block;
-    float: none; }
+    float: none;
+    max-width: none; }
 
   .b-scroll-top {
     position: fixed;
@@ -2464,12 +2467,12 @@ textarea.b-input {
     position: absolute;
     left: 50%;
     top: 0;
-    margin-bottom: 90px;
+    margin-bottom: 60px;
     margin-left: -50px;
-    width: 101px;
-    height: 40px;
-    background: url(../i/logo.svg) no-repeat;
-    background-size: cover; }
+    width: 100px;
+    height: 60px;
+    background: url("../i/new-logo.svg") no-repeat;
+    background-size: 100% auto; }
   .b-popup__first h2 {
     font-size: 61px;
     line-height: 70px;
