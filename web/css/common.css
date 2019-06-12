@@ -465,11 +465,11 @@ h6 {
     width: 91%; }
   .b-header .b-logo {
     position: absolute;
-    top: 11px;
+    top: -2px;
     left: 50%;
     margin-left: -50px;
-    width: 101px;
-    height: 40px;
+    width: 10px;
+    height: 60px;
     background: url("../i/new-logo.svg") no-repeat;
     background-size: 100% auto;
     transition: transform .4s; }
@@ -742,7 +742,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 272px;
   background: #0a0a0a;
   text-align: center;
-  padding-top: 43px;
+  padding-top: 30px;
   transform: rotateY(90deg);
   opacity: 0;
   visibility: hidden;
@@ -751,10 +751,10 @@ input[type=number]::-webkit-outer-spin-button {
   .b-menu__box .b-menu__logo {
     display: inline-block;
     vertical-align: top;
-    width: 101px;
-    height: 40px;
-    background: url("../i/logo.svg") no-repeat;
-    background-size: cover; }
+    width: 100px;
+    height: 60px;
+    background: url("../i/new-logo.svg") no-repeat;
+    background-size: 100% auto; }
   .b-menu__box .b-menu {
     position: absolute;
     top: 50%;
@@ -1306,8 +1306,11 @@ input[type=number]::-webkit-outer-spin-button {
     height: 50px;
     padding: 10px 17px; }
 
+  .b-menu__box {
+    padding-top: 28px; }
+
   .b-header .b-logo {
-    top: 5px; }
+    top: -5px; }
   .b-header .b-wrapper {
     width: 92%; }
 
